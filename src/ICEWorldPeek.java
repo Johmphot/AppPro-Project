@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -16,7 +17,8 @@ public class ICEWorldPeek
 			System.out.print("Select: ");
 			num = Integer.parseInt(in.readLine());
 			String arg, inputLine;
-			URL url = new URL("http://iceworld.sls-atl.com/");
+			URL url = new URL("http://iceworld.sls-atl.com/");	
+			URLConnection iceWorld = url.openConnection();
 			switch (num) 
 			{
 				case 1:
@@ -43,7 +45,6 @@ public class ICEWorldPeek
 			}
 			if (num!=0) 
 			{
-				URLConnection iceWorld = url.openConnection();
 				BufferedReader temp = new BufferedReader(new InputStreamReader(iceWorld.getInputStream()));
 				while ((inputLine = temp.readLine()) != null) 
 				{
@@ -63,6 +64,7 @@ public class ICEWorldPeek
 		System.out.println("3.Actions");
 		System.out.println("4.gResources");
 		System.out.println("5.gurl");
+		System.out.println("0.Exit");
 	}
 	
 }
