@@ -1,5 +1,7 @@
 
+
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -10,41 +12,72 @@ public class ICEWorldPeek
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("-----ICE World Peek-----");
 		int num;
-		 do
-		 {
+		URL url = null;
+		try
+		{
+			url = new URL("http://iceworld.sls-atl.com/");	
+			URLConnection check = url.openConnection();
+			check.connect();
+		}
+		catch(MalformedURLException e)
+		{
+			System.out.println("ICE World could not be reached.\nTry again later.");
+			System.exit(0);
+		}
+		catch(IOException e)
+		{
+			System.out.println("ICE World could not be reached.\nTry again later.");
+			System.exit(0);
+		}
+		do
+		{
 			System.out.println("HTTP Request");
 			requestList();
 			System.out.print("Select: ");
 			num = Integer.parseInt(in.readLine());
 			String arg, inputLine;
-			URL url = new URL("http://iceworld.sls-atl.com/");	
-			URLConnection iceWorld = url.openConnection();
+			try
+			{
+				url = new URL("http://iceworld.sls-atl.com/");	
+				URLConnection check = url.openConnection();
+				check.connect();
+			}
+			catch(MalformedURLException e)
+			{
+				System.out.println("ICE World could not be reached");
+			}
+			catch(IOException e)
+			{
+				System.out.println("ICE World could not be reached");
+			}
+
 			switch (num) 
 			{
-				case 1:
-					url = new URL("http://iceworld.sls-atl.com/api/&cmd=time");
-					break;
-				case 2:
-					url = new URL("http://iceworld.sls-atl.com/api/&cmd=states");
-					break;
-				case 3:
-					System.out.print("actions from: ");
-					arg = in.readLine();
-					url = new URL("http://iceworld.sls-atl.com/api/&cmd=actions&from="+ arg);
-					break;
-				case 4:
-					System.out.print("uid: ");
-					arg = in.readLine();
-					url = new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+ arg);
-					break;
-				case 5:
-					System.out.print("gid: ");
-					arg = in.readLine();
-					url = new URL("http://iceworld.sls-atl.com/api/&cmd=gurl&gid="+ arg);
-					break;
+			case 1:
+				url = new URL("http://iceworld.sls-atl.com/api/&cmd=time");
+				break;
+			case 2:
+				url = new URL("http://iceworld.sls-atl.com/api/&cmd=states");
+				break;
+			case 3:
+				System.out.print("actions from: ");
+				arg = in.readLine();
+				url = new URL("http://iceworld.sls-atl.com/api/&cmd=actions&from="+ arg);
+				break;
+			case 4:
+				System.out.print("uid: ");
+				arg = in.readLine();
+				url = new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+ arg);
+				break;
+			case 5:
+				System.out.print("gid: ");
+				arg = in.readLine();
+				url = new URL("http://iceworld.sls-atl.com/api/&cmd=gurl&gid="+ arg);
+				break;
 			}
 			if (num!=0) 
 			{
+				URLConnection iceWorld = url.openConnection();
 				BufferedReader temp = new BufferedReader(new InputStreamReader(iceWorld.getInputStream()));
 				while ((inputLine = temp.readLine()) != null) 
 				{
@@ -56,7 +89,7 @@ public class ICEWorldPeek
 		}
 		while(num!=0);
 	}
-	
+
 	public static void requestList()
 	{
 		System.out.println("1.Time");
@@ -66,5 +99,5 @@ public class ICEWorldPeek
 		System.out.println("5.gurl");
 		System.out.println("0.Exit");
 	}
-	
+
 }

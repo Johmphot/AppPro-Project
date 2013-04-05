@@ -1,4 +1,5 @@
 import iceworld.given.*;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
+	private ICEWorldImmigration immigration;
 
 	/**
 	 * Launch the application.
@@ -175,6 +177,18 @@ public class Login extends JFrame {
 		contentPane.add(btnLogin);
 		
 		JButton btnAlien = new JButton("Login As Alien");
+		btnAlien.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				if(alienLogin())
+				{
+					Main world = new Main("Alien");
+					dispose();
+					world.setVisible(true);
+				}
+			}
+		});
 		btnAlien.setBounds(301, 385, 214, 29);
 		contentPane.add(btnAlien);
 		
@@ -197,17 +211,36 @@ public class Login extends JFrame {
 		look.gidS = "S001";
 		look.gidW = "W001";
 		
-		ICEWorldImmigration immigration = new ICEWorldImmigration(user); 
+		immigration = new ICEWorldImmigration(user); 
 		if(immigration.login(password))
 		{
-			System.out.println("Login Succesful");
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
 			return true;
 		}
 		else return false;
 	}
 	
-	public void alienLogin()
+	public boolean alienLogin()
 	{
+		Icetizen user = new Icetizen();
+		user.setIcePortID(253); //Port ID 253
+		user.setListeningPort(10008);
+		IcetizenLook look = new IcetizenLook();
+		look.gidB = "B001";
+		look.gidH = "H001";
+		look.gidS = "S001";
+		look.gidW = "W001";
 		
+		immigration = new ICEWorldImmigration(user); 
+		if(immigration.loginAlien())
+		{
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "Login as an Alien", "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		}
+		else return false;
 	}
+	
+
 }
