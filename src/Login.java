@@ -1,3 +1,4 @@
+import iceworld.given.*;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
@@ -18,13 +20,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyVetoException;
-
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
+	private ICEWorldImmigration immigration;
 
 	/**
 	 * Launch the application.
@@ -86,7 +87,11 @@ public class Login extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				//incomplete- run ICEWorldPeek
+				try 
+				{
+					ICEWorldPeek.main(null);
+				} 
+				catch (Exception e) {}
 			}
 		});
 		mnOpen.add(mntmIceWorldPeek);
@@ -132,7 +137,7 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
+		final JFormattedTextField formattedTextField = new JFormattedTextField();
 		formattedTextField.setBounds(320, 176, 261, 28);
 		contentPane.add(formattedTextField);
 		
@@ -153,15 +158,37 @@ public class Login extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				Main world = new Main();
-				dispose();
-				world.setVisible(true);
+				String name = formattedTextField.getText();
+				String password = passwordField.getPassword().toString();
+				if (userLogin(name,password))
+				{
+					Main world = new Main(name);
+					dispose();
+					world.setVisible(true);
+				}
+				else
+				{
+					JFrame frame = new JFrame();
+					JOptionPane.showMessageDialog(frame, "Incorrect Username//Password", "Login Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnLogin.setBounds(349, 322, 117, 29);
 		contentPane.add(btnLogin);
 		
 		JButton btnAlien = new JButton("Login As Alien");
+		btnAlien.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				if(alienLogin())
+				{
+					Main world = new Main("Alien");
+					dispose();
+					world.setVisible(true);
+				}
+			}
+		});
 		btnAlien.setBounds(301, 385, 214, 29);
 		contentPane.add(btnAlien);
 		
@@ -171,4 +198,49 @@ public class Login extends JFrame {
 		lblIceWorld.setBounds(244, 71, 337, 51);
 		contentPane.add(lblIceWorld);
 	}
+	
+	public boolean userLogin(String username,String password)
+	{
+		Icetizen user = new Icetizen();
+		user.setIcePortID(253); //Port ID 253
+		user.setUsername(username);
+		user.setListeningPort(10008);
+		IcetizenLook look = new IcetizenLook();
+		look.gidB = "B001";
+		look.gidH = "H001";
+		look.gidS = "S001";
+		look.gidW = "W001";
+		
+		immigration = new ICEWorldImmigration(user); 
+		if(immigration.login(password))
+		{
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean alienLogin()
+	{
+		Icetizen user = new Icetizen();
+		user.setIcePortID(253); //Port ID 253
+		user.setListeningPort(10008);
+		IcetizenLook look = new IcetizenLook();
+		look.gidB = "B001";
+		look.gidH = "H001";
+		look.gidS = "S001";
+		look.gidW = "W001";
+		
+		immigration = new ICEWorldImmigration(user); 
+		if(immigration.loginAlien())
+		{
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "Login as an Alien", "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		}
+		else return false;
+	}
+	
+
 }

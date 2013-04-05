@@ -1,30 +1,7 @@
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.event.InputEvent;
-import javax.swing.JSeparator;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
-import javax.swing.JTextArea;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JSplitPane;
-import javax.swing.border.BevelBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.border.*;
 
 public class Main extends JFrame {
 
@@ -34,13 +11,18 @@ public class Main extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main frame = new Main();
+			public void run() 
+			{
+				try 
+				{
+					Main frame = new Main("ICE World");
 					frame.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -50,9 +32,9 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Main(String name) {
 		setResizable(false);
-		setTitle("ICE World");
+		setTitle("ICE World: "+name);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		
@@ -76,7 +58,11 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				//incomplete- run ICEWorldPeek
+				try 
+				{
+					ICEWorldPeek.main(null);
+				} 
+				catch (Exception e1) {}
 			}
 		});
 		mnOpen.add(mntmIceWorldPeek);
@@ -149,49 +135,45 @@ public class Main extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		panel.setBounds(6, 6, 964, 512);
-		contentPane.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel graphicPanel = new JPanel();
+		graphicPanel.setBackground(Color.WHITE);
+		graphicPanel.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+		graphicPanel.setBounds(6, 6, 964, 512);
+		contentPane.add(graphicPanel);
+		graphicPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2, BorderLayout.EAST);
-		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(null);
-		panel_1.setBounds(277, 525, 741, 193);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel controlPanel = new JPanel();
+		controlPanel.setBorder(null);
+		controlPanel.setBounds(277, 525, 741, 193);
+		contentPane.add(controlPanel);
+		controlPanel.setLayout(null);
 		
 		JButton btnTalk = new JButton("Talk");
 		btnTalk.setBounds(29, 141, 60, 20);
-		panel_1.add(btnTalk);
+		controlPanel.add(btnTalk);
 		
 		JButton btnYell = new JButton("Yell");
 		btnYell.setBounds(101, 141, 60, 20);
-		panel_1.add(btnYell);
+		controlPanel.add(btnYell);
 		
 		JButton btnSpecialAction = new JButton("Special Action");
 		btnSpecialAction.setBounds(29, 35, 132, 52);
-		panel_1.add(btnSpecialAction);
+		controlPanel.add(btnSpecialAction);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.WHITE);
-		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
-		panel_3.setBounds(414, 6, 298, 176);
-		panel_1.add(panel_3);
+		JPanel miniMap = new JPanel();
+		miniMap.setBackground(Color.WHITE);
+		miniMap.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
+		miniMap.setBounds(414, 6, 298, 176);
+		controlPanel.add(miniMap);
 		
 		JLabel lblWeather = new JLabel("Weather");
 		lblWeather.setBounds(258, 22, 61, 16);
-		panel_1.add(lblWeather);
+		controlPanel.add(lblWeather);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.WHITE);
-		panel_4.setBounds(229, 50, 121, 98);
-		panel_1.add(panel_4);
+		JPanel weatherPanel = new JPanel();
+		weatherPanel.setBackground(Color.WHITE);
+		weatherPanel.setBounds(229, 50, 121, 98);
+		controlPanel.add(weatherPanel);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(15, 530, 230, 122);
@@ -210,4 +192,5 @@ public class Main extends JFrame {
 		slider.setBounds(982, 28, 36, 490);
 		contentPane.add(slider);
 	}
+
 }
