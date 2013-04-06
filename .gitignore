@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiled source #
 ###################
 *.com
@@ -41,3 +42,6 @@ Thumbs.db
 .classpath
 
 .DS_Store
+=======
+/bin
+>>>>>>> parent of 50f3f1b... Next commit.

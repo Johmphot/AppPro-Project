@@ -1,10 +1,11 @@
+
 import iceworld.given.IcetizenLook;
 import iceworld.given.MyIcetizen;
 
 public class Icetizen implements MyIcetizen
 {
 	int portID, listeningPort;
-	
+
 	@Override
 	public int getIcePortID() 
 	{
@@ -41,21 +42,21 @@ public class Icetizen implements MyIcetizen
 	public void setIcetizenLook(IcetizenLook arg0) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setListeningPort(int arg0) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setUsername(String arg0) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

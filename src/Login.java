@@ -58,16 +58,16 @@ public class Login extends JFrame {
 		setTitle("Login To ICE World");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
-		
+
 		JMenu mnOpen = new JMenu("Open");
 		mnFile.add(mnOpen);
-		
+
 		JMenuItem mntmNewLoginWindow = new JMenuItem("New Login Window");
 		mntmNewLoginWindow.addActionListener(new ActionListener() 
 		{
@@ -78,10 +78,10 @@ public class Login extends JFrame {
 			}
 		});
 		mnOpen.add(mntmNewLoginWindow);
-		
+
 		JSeparator separator_2 = new JSeparator();
 		mnOpen.add(separator_2);
-		
+
 		JMenuItem mntmIceWorldPeek = new JMenuItem("ICE World Peek");
 		mntmIceWorldPeek.addActionListener(new ActionListener() 
 		{
@@ -95,7 +95,7 @@ public class Login extends JFrame {
 			}
 		});
 		mnOpen.add(mntmIceWorldPeek);
-		
+
 		JMenuItem mntmPreferences = new JMenuItem("Preferences...");
 		mntmPreferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -105,16 +105,16 @@ public class Login extends JFrame {
 			}
 		});
 		mnFile.add(mntmPreferences);
-		
+
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
-		
+
 		JMenuItem mntmAbout = new JMenuItem("About");
 		mnFile.add(mntmAbout);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		mnFile.add(separator_1);
-		
+
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() 
 		{
@@ -125,10 +125,10 @@ public class Login extends JFrame {
 		});
 		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
 		mnFile.add(mntmExit);
-		
+
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-		
+
 		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
 		mntmHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnHelp.add(mntmHelpContents);
@@ -136,23 +136,23 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		final JFormattedTextField formattedTextField = new JFormattedTextField();
 		formattedTextField.setBounds(320, 176, 261, 28);
 		contentPane.add(formattedTextField);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(320, 248, 261, 28);
 		contentPane.add(passwordField);
-		
+
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(230, 182, 67, 16);
 		contentPane.add(lblUsername);
-		
+
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(230, 254, 65, 16);
 		contentPane.add(lblPassword);
-		
+
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() 
 		{
@@ -175,7 +175,7 @@ public class Login extends JFrame {
 		});
 		btnLogin.setBounds(349, 322, 117, 29);
 		contentPane.add(btnLogin);
-		
+
 		JButton btnAlien = new JButton("Login As Alien");
 		btnAlien.addActionListener(new ActionListener() 
 		{
@@ -191,14 +191,14 @@ public class Login extends JFrame {
 		});
 		btnAlien.setBounds(301, 385, 214, 29);
 		contentPane.add(btnAlien);
-		
+
 		JLabel lblIceWorld = new JLabel("ICE World");
 		lblIceWorld.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIceWorld.setFont(new Font("Lucida Grande", Font.PLAIN, 50));
 		lblIceWorld.setBounds(244, 71, 337, 51);
 		contentPane.add(lblIceWorld);
 	}
-	
+
 	public boolean userLogin(String username,String password)
 	{
 		Icetizen user = new Icetizen();
@@ -210,7 +210,7 @@ public class Login extends JFrame {
 		look.gidH = "H001";
 		look.gidS = "S001";
 		look.gidW = "W001";
-		
+
 		immigration = new ICEWorldImmigration(user); 
 		if(immigration.login(password))
 		{
@@ -220,7 +220,7 @@ public class Login extends JFrame {
 		}
 		else return false;
 	}
-	
+
 	public boolean alienLogin()
 	{
 		Icetizen user = new Icetizen();
@@ -231,7 +231,7 @@ public class Login extends JFrame {
 		look.gidH = "H001";
 		look.gidS = "S001";
 		look.gidW = "W001";
-		
+
 		immigration = new ICEWorldImmigration(user); 
 		if(immigration.loginAlien())
 		{
@@ -241,6 +241,6 @@ public class Login extends JFrame {
 		}
 		else return false;
 	}
-	
+
 
 }
