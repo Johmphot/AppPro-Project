@@ -1,0 +1,226 @@
+package GraphicElements;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+public class IsometricMap implements Drawable 
+{
+
+	private final int HEIGHT = 512;
+	private final int WIDTH = 964;
+
+	private final int MAX_TILES_X = 100;
+	private final int MAX_TILES_Y = 100;
+
+	private HashMap<Point, IsometricSprite> pointMap = null;
+	private int last_x, total_rows;
+	private Point mousePoint = null;
+	private Point focusPoint = null;
+
+	private boolean dragged = false;
+
+	private int firstRow, firstPoint, lastRow, lastPoint;
+
+	private boolean ready = false;
+	private long total, current;
+
+	public void start() 
+	{
+		if (pointMap == null) 
+		{
+			generateBlankMap(100);
+		}
+	}
+
+	public void draw(Graphics g) 
+	{
+
+		if(!ready) return;
+
+		if(focusPoint != null) 
+		{
+			firstRow = Math.max(0, focusPoint.y - MAX_TILES_Y);
+			firstPoint = Math.max(0, focusPoint.x - MAX_TILES_X);
+		}
+
+		lastRow = Math.min(total_rows, firstRow + 2 * MAX_TILES_Y);
+		lastPoint = Math.min(last_x, firstPoint + 2 * MAX_TILES_X);
+
+
+		// Recalculates center or focus position.
+		Point center = calculatePos(focusPoint);
+
+		for (int y = firstRow; y < lastRow; y++) 
+		{
+			for (int x = lastPoint; x >= firstPoint; x--) 
+			{
+				IsometricSprite ip = pointMap.get(new Point(x, y));
+				if (ip != null) {
+
+					// Transforms sprite to normal position
+					ip.transformPoly(center);
+
+					// Deals with mouse dragging and highlighting.
+
+					if (mousePoint != null && ip.contains(mousePoint)) 
+					{
+						if (!dragged) 
+						{
+							ip.setHighlight(true);
+						} 
+						else 
+						{
+							focusPoint = new Point(x, y);
+						}
+					} 
+					else 
+					{
+						ip.setHighlight(false);
+					}
+					ip.draw(g);
+				}
+			}
+		}
+	}
+
+	private Point calculatePos(Point mid) {
+		IsometricSprite ip = pointMap.get(mid);
+		Point tmp = ip.getCenter();
+		int tmp_x = WIDTH / 2 - tmp.x;
+		int tmp_y = HEIGHT / 2 - tmp.y;
+		// return null;
+		return new Point(tmp_x, tmp_y);
+	}
+
+	private void generateBlankMap(int rows) {
+		total = rows * rows;
+		current = 0;
+
+		pointMap = new HashMap<Point, IsometricSprite>();
+
+		int tmp_backwards = rows + 1;
+
+		int tileRows = (rows * 2) - 1; // 9 rida kokku kui on 5x5 maatriks.
+		int lastX = rows - 1;
+
+		boolean decrease = false;
+
+		for (int y = 0; y < tileRows; y++) 
+		{
+
+			if (y + 1 >= rows) 
+			{
+				decrease = true;
+				tmp_backwards--;
+			}
+
+			int tilesInRow = (y < rows - 1 ? y + 1 : (y + 1 == rows ? rows : tmp_backwards));
+
+			for (int x = 0; x < tilesInRow; x++) 
+			{
+				current++;
+				int tmp_x = lastX + 2 * x;
+
+				last_x = Math.max(tmp_x, last_x);
+
+				Point tmp_point = new Point(tmp_x, y);
+				IsometricSprite tmp_ip = new IsometricSprite(tmp_x, y);
+				pointMap.put(tmp_point, tmp_ip);
+
+				// Generates random focus point
+				if (y + 1 == rows && x == tilesInRow / 2) 
+				{
+					focusPoint = tmp_point;
+					tmp_ip.setFocused(true);
+
+				}
+			}
+			if (!decrease)   lastX--;
+			else lastX++;
+		}
+		total_rows = tileRows;
+		System.out.println("Map generated. Rows: " + total_rows + " Points: " + total);
+
+		linkTiles();
+		ready = true;
+	}
+
+	public void setMousePoint(Point mousePoint) 
+	{
+		this.mousePoint = mousePoint;
+	}
+
+	private void linkTiles() 
+	{
+		int link = 0;
+		synchronized (pointMap) 
+		{
+			Iterator<Point> it = pointMap.keySet().iterator();
+			while (it.hasNext()) 
+			{
+
+				Point tmp_p = it.next();
+				IsometricSprite ip = pointMap.get(tmp_p);
+				ArrayList<IsometricSprite> tmp_list = new ArrayList<IsometricSprite>();
+
+				final int total_points = 9;
+				final int total_cycles = 3;
+				for (int i = 0; i < total_points; i++) 
+				{
+					int loop = i % total_cycles;
+					int cycle = i / total_cycles;
+
+					Point tmp = new Point(tmp_p.x + loop - cycle, tmp_p.y - 2 + loop + cycle);
+					IsometricSprite tmp_ip = pointMap.get(tmp);
+					if (tmp_ip != null && tmp_ip != ip) 
+					{
+						tmp_list.add(tmp_ip);
+					}
+				}
+				link += tmp_list.size();
+				ip.setLinkedPoints(tmp_list);
+			}
+		}
+		System.out.println("Points successfully linked. Total links generated: "+ link);
+	}
+
+	public void setDragged(boolean dragged) 
+	{
+		this.dragged = dragged;
+	}
+
+	public boolean isReady() 
+	{
+		return ready;
+	}
+
+	public long getTotalTiles() 
+	{
+		return total;
+	}
+
+	public long getCurrentTile() 
+	{
+		return current;
+	}
+
+	public IsometricSprite getPoint(Point p) 
+	{
+
+		for (int y = firstRow; y < lastRow; y++)
+		{
+			for (int x = lastPoint; x >= firstPoint; x--) 
+			{
+				IsometricSprite ip = pointMap.get(new Point(x, y));
+				if (ip != null && ip.relativeContains(p)) 
+				{
+					return ip;
+				}
+			}
+		}
+		return null;
+	}
+}
+
