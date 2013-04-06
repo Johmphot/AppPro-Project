@@ -41,3 +41,6 @@ Thumbs.db
 .classpath
 
 .DS_Store
+.settings/org.eclipse.ltk.core.refactoring.prefs
+META-INF/MANIFEST.MF
+src/META-INF/MANIFEST.MF
