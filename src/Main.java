@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.border.*;
 
+
 public class Main extends JFrame {
 
 	private JPanel contentPane;
@@ -32,7 +33,8 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main(String name) {
+	public Main(String name)
+	{
 		setResizable(false);
 		setTitle("ICE World: "+name);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -134,13 +136,10 @@ public class Main extends JFrame {
 		textField.setBounds(15, 668, 230, 28);
 		contentPane.add(textField);
 		textField.setColumns(10);
-
-		JPanel graphicPanel = new JPanel();
-		graphicPanel.setBackground(Color.WHITE);
-		graphicPanel.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		graphicPanel.setBounds(6, 6, 964, 512);
-		contentPane.add(graphicPanel);
-		graphicPanel.setLayout(new BorderLayout(0, 0));
+		
+		GraphicElements.Window window = new GraphicElements.Window();
+		window.setBounds(6, 6, 964, 512);
+		contentPane.add(window);
 
 		JPanel controlPanel = new JPanel();
 		controlPanel.setBorder(null);
