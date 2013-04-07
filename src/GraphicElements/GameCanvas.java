@@ -22,7 +22,7 @@ public class GameCanvas extends Canvas implements Runnable
 	private final int HEIGHT = 512;
 	private final int WIDTH = 964;
 
-	IsometricMap iso = null;
+	public IsometricMap iso = null;
 
 	private volatile boolean active = true;
 	private BufferStrategy buffer;
@@ -100,18 +100,10 @@ public class GameCanvas extends Canvas implements Runnable
 			{
 				if(arg0.getButton()==1)
 				{
-					mouseOnePressed(arg0);
+					System.out.println(iso.getPoint(getMousePosition()));
 				}
 			}
 		});
-	}
-
-	private void mouseOnePressed(MouseEvent evt) 
-	{
-		if (toolMenu.isActive()) 
-		{
-			toolMenu.mouseAction(evt);
-		}
 	}
 
 	@Override
@@ -186,7 +178,7 @@ public class GameCanvas extends Canvas implements Runnable
 
 	private void setup() 
 	{
-		setIgnoreRepaint(true);
+		//setIgnoreRepaint(true);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setSize(WIDTH, HEIGHT);
 		setVisible(true);

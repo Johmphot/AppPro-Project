@@ -7,7 +7,6 @@ import java.awt.event.MouseWheelEvent;
 
 public interface ToolMenuItem 
 {
-
 	public void setWidth(int width);
 	public void draw(Graphics g, int x, int y);
 	public boolean inBounds(Point p);

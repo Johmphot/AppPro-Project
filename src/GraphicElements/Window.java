@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class Window extends JPanel
 {
 
-	private GameCanvas canvas = null;
+	public GameCanvas canvas = null;
 
 	public Window() 
 	{
@@ -21,4 +21,5 @@ public class Window extends JPanel
 		}
 		return canvas;
 	}
+	
 }

@@ -2,7 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.border.*;
-
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class Main extends JFrame {
 
@@ -104,6 +105,15 @@ public class Main extends JFrame {
 		menuBar.add(mnAccount);
 
 		JMenuItem mntmCustomization = new JMenuItem("Customization...");
+		mntmCustomization.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Customize c = new Customize();
+				c.setVisible(true);
+				c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			}
+		});
 		mnAccount.add(mntmCustomization);
 
 		JSeparator separator_2 = new JSeparator();
@@ -136,8 +146,8 @@ public class Main extends JFrame {
 		textField.setBounds(15, 668, 230, 28);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
-		GraphicElements.Window window = new GraphicElements.Window();
+
+		final GraphicElements.Window window = new GraphicElements.Window();
 		window.setBounds(6, 6, 964, 512);
 		contentPane.add(window);
 
@@ -183,13 +193,80 @@ public class Main extends JFrame {
 		contentPane.add(lblZoom);
 
 		JSlider slider = new JSlider();
-		slider.setMinorTickSpacing(5);
+		slider.setValue(0);
+		slider.setMaximum(10);
+		slider.addChangeListener(new ChangeListener() 
+		{
+			public void stateChanged(ChangeEvent e) 
+			{
+				JSlider source = (JSlider) e.getSource();
+				if (!source.getValueIsAdjusting()) 
+				{
+					int level = (int) source.getValue();
+					window.canvas.iso.zoomLevel = level;
+					window.canvas.iso.regenerateMap();
+				}
+			}
+		});
+		slider.setMinorTickSpacing(1);
 		slider.setSnapToTicks(true);
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
 		slider.setOrientation(SwingConstants.VERTICAL);
 		slider.setBounds(982, 28, 36, 490);
 		contentPane.add(slider);
-	}
+		
+		
+		InputMap arrow = new InputMap();
+		ActionMap action = new ActionMap();
+		// add CONTROL to speed up movement
+		
+		arrow = window.getInputMap();
+		arrow.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0,false),"down");
+		arrow.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0,false),"up");
+		arrow.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0,false),"left");
+		arrow.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0,false),"right");
+		
+		action = window.getActionMap();
+		action.put("left", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
 
+			public void actionPerformed(ActionEvent e) 
+	        {
+				int speed = window.canvas.iso.zoomLevel+1;
+				window.canvas.iso.WIDTH += 5*speed;
+	        }
+		});
+		action.put("right", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) 
+	        {
+				int speed = window.canvas.iso.zoomLevel+1;
+				window.canvas.iso.WIDTH -= 5*speed;
+	        }
+		});
+		action.put("up", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) 
+	        {
+				int speed = window.canvas.iso.zoomLevel+1;
+				window.canvas.iso.HEIGHT += 5*speed;
+	        }
+		});
+		action.put("down", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) 
+	        {
+				int speed = window.canvas.iso.zoomLevel+1;
+				window.canvas.iso.HEIGHT -= 5*speed;
+	        }
+		});
+	}
 }

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class IsometricSprite implements Drawable
 {
-	private int width = 4;
-	private int height = 2;
+	private int width; // zoom level
+	private int height;
 
 	private boolean highlighted = false;
 	private boolean focused = false;
@@ -208,7 +208,6 @@ public class IsometricSprite implements Drawable
 		this.item = item;
 		item.setIsometricPoint(this);
 	}
-
 	public Point getImageLocation(int img_width, int img_height) 
 	{
 		Point tmp = getCenter();
@@ -257,5 +256,13 @@ public class IsometricSprite implements Drawable
 	public int getWidth() 
 	{
 		return width;
+	}
+	public void setHeight(int height)
+	{
+		this.height = height;
+	}
+	public void setWidth(int width)
+	{
+		this.width = width;
 	}
 }
