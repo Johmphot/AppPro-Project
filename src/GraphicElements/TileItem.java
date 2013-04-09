@@ -25,9 +25,9 @@ public abstract class TileItem implements Drawable
 		iso.setBuildable(buildable);
 
 		// Getting the right shape
-		//Point drawPoint = iso.getImageLocation(img.getWidth(), img.getHeight());
+		Point drawPoint = iso.getImageLocation(img.getWidth(), img.getHeight());
 		Rectangle tmp = img.getData().getBounds();
-		//tmp.translate(drawPoint.x, drawPoint.y);
+		tmp.translate(drawPoint.x, drawPoint.y);
 
 		// Edge points
 		ArrayList<IsometricSprite> edge = new ArrayList<IsometricSprite>();
@@ -103,7 +103,7 @@ public abstract class TileItem implements Drawable
 	{
 		if (iso == null || img == null)	return;
 
-		//Point drawPoint = iso.getImageLocation(img.getWidth(), img.getHeight());
+		Point drawPoint = iso.getImageLocation(img.getWidth(), img.getHeight());
 
 		if (edge_iso != null) 
 		{
@@ -113,11 +113,11 @@ public abstract class TileItem implements Drawable
 			int corr_x = diff_x * edge_iso.getWidth();
 			int corr_y = diff_y * edge_iso.getHeight();
 
-			//drawPoint.x += corr_x;
-			//drawPoint.y += corr_y;
+			drawPoint.x += corr_x;
+			drawPoint.y += corr_y;
 
 		} 
-		//g.drawImage(img, drawPoint.x, drawPoint.y, null);
+		g.drawImage(img, drawPoint.x, drawPoint.y, null);
 	}
 
 	protected void setPassable(boolean passable) 

@@ -1,5 +1,4 @@
 import iceworld.given.*;
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,11 +20,12 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Login extends JFrame {
+public class Login extends JFrame 
+{
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
-	private ICEWorldImmigration immigration;
+	public static Icetizen user; 
 
 	/**
 	 * Launch the application.
@@ -159,7 +159,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				String name = formattedTextField.getText();
-				String password = passwordField.getPassword().toString();
+				String password = new String(passwordField.getPassword());
 				if (userLogin(name,password))
 				{
 					Main world = new Main(name);
@@ -201,17 +201,17 @@ public class Login extends JFrame {
 
 	public boolean userLogin(String username,String password)
 	{
-		Icetizen user = new Icetizen();
+		user = new Icetizen();
+		ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) user); 
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
-		user.setListeningPort(10008);
+		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();
 		look.gidB = "B001";
 		look.gidH = "H001";
 		look.gidS = "S001";
 		look.gidW = "W001";
-
-		immigration = new ICEWorldImmigration(user); 
+		
 		if(immigration.login(password))
 		{
 			JFrame frame = new JFrame();
@@ -223,16 +223,15 @@ public class Login extends JFrame {
 
 	public boolean alienLogin()
 	{
-		Icetizen user = new Icetizen();
+		user = new Icetizen();
+		ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) user); 
 		user.setIcePortID(253); //Port ID 253
-		user.setListeningPort(10008);
+		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();
 		look.gidB = "B001";
 		look.gidH = "H001";
 		look.gidS = "S001";
 		look.gidW = "W001";
-
-		immigration = new ICEWorldImmigration(user); 
 		if(immigration.loginAlien())
 		{
 			JFrame frame = new JFrame();

@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -100,7 +99,8 @@ public class GameCanvas extends Canvas implements Runnable
 			{
 				if(arg0.getButton()==1)
 				{
-					System.out.println(iso.getPoint(getMousePosition()));
+					System.out.println(Translator.toGrid(iso.getPoint(getMousePosition().getLocation())));
+					//System.out.println(iso.getPoint(getMousePosition().getLocation()));
 				}
 			}
 		});
@@ -153,7 +153,7 @@ public class GameCanvas extends Canvas implements Runnable
 		}
 	}
 
-	private void renderMap(Graphics g)
+	public void renderMap(Graphics g)
 	{
 		if (iso != null)
 		{
@@ -178,7 +178,7 @@ public class GameCanvas extends Canvas implements Runnable
 
 	private void setup() 
 	{
-		//setIgnoreRepaint(true);
+		setIgnoreRepaint(true);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setSize(WIDTH, HEIGHT);
 		setVisible(true);

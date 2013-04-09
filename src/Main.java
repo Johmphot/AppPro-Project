@@ -1,3 +1,4 @@
+import iceworld.given.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -124,9 +125,13 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				dispose();
-				Login newFrame = new Login();
-				newFrame.setVisible(true);
+				ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) Login.user);
+				if(immigration.logout())
+				{
+					dispose();
+					Login newFrame = new Login();
+					newFrame.setVisible(true);
+				}
 			}
 		});
 		mnAccount.add(mntmLogout);

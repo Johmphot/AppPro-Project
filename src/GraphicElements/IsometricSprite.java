@@ -70,7 +70,8 @@ public class IsometricSprite implements Drawable
 	 */
 	private void drawItem(Graphics g) 
 	{
-		if (item != null) {
+		if (item != null) 
+		{
 			item.draw(g);
 		}
 	}
@@ -79,12 +80,12 @@ public class IsometricSprite implements Drawable
 	 * Drawing points
 	 * @param g
 	 */
-	private void drawPoint(Graphics g) 
+	public int n =1;
+	public void drawPoint(Graphics g) 
 	{
 		rect = poly.getBounds();
 		g.setColor(Color.black);
-		g.drawString("(" + x + "," + y + ")", rect.x + width - 12, rect.y
-				+ height + 5);
+		g.drawString("(" + x + "," + y + ")"+n, rect.x + width - 12, rect.y + height + 5);
 	}
 
 	@Override
@@ -124,9 +125,9 @@ public class IsometricSprite implements Drawable
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	public String toString() {
-		return "x=" + x + ", y=" + y + ", height=" + height + ", width="
-				+ width;
+	public String toString() 
+	{
+		return "x=" + x + ", y=" + y + ", height=" + height + ", width=" + width;
 	}
 
 	/**

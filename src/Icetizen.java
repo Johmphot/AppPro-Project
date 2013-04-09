@@ -5,6 +5,7 @@ import iceworld.given.MyIcetizen;
 public class Icetizen implements MyIcetizen
 {
 	int portID, listeningPort;
+	String username;
 
 	@Override
 	public int getIcePortID() 
@@ -28,8 +29,7 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public String getUsername() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return username;
 	}
 
 	@Override
@@ -48,15 +48,13 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public void setListeningPort(int arg0) 
 	{
-		// TODO Auto-generated method stub
-
+		listeningPort = arg0;
 	}
 
 	@Override
 	public void setUsername(String arg0) 
 	{
-		// TODO Auto-generated method stub
-
+		username = arg0;
 	}
 
 }

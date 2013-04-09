@@ -25,9 +25,10 @@ public class IsometricMap implements Drawable
 
 	private boolean ready = false;
 	private long total, current;
-	
+
 	public int zoomLevel = 0;
 	private final int TOTAL_ROWS = 100;
+	public IsometricSprite[][] map= new IsometricSprite[100][100];
 
 	public void start() 
 	{
@@ -97,7 +98,8 @@ public class IsometricMap implements Drawable
 		return new Point(tmp_x, tmp_y);
 	}
 
-	public void generateBlankMap(int rows) {
+	public void generateBlankMap(int rows) 
+	{
 		total = rows * rows;
 		current = 0;
 
@@ -132,7 +134,6 @@ public class IsometricMap implements Drawable
 				IsometricSprite tmp_ip = new IsometricSprite(tmp_x, y); 
 				adjustZoom(tmp_ip,zoomLevel);
 				pointMap.put(tmp_point, tmp_ip);
-
 				// Generates random focus point
 				if (y + 1 == rows && x == tilesInRow / 2) 
 				{
@@ -141,7 +142,7 @@ public class IsometricMap implements Drawable
 
 				}
 			}
-			if (!decrease)   lastX--;
+			if (!decrease) lastX--;
 			else lastX++;
 		}
 		total_rows = tileRows;
@@ -150,7 +151,7 @@ public class IsometricMap implements Drawable
 		linkTiles();
 		ready = true;
 	}
-	
+
 	public void regenerateMap()
 	{
 		linkTiles();
@@ -194,7 +195,7 @@ public class IsometricMap implements Drawable
 			}
 		}
 		System.out.println("Points successfully linked. Total links generated: "+ link);
-	
+
 	}
 
 	public void setDragged(boolean dragged) 
@@ -233,7 +234,7 @@ public class IsometricMap implements Drawable
 		}
 		return null;
 	}
-	
+
 	public void adjustZoom(IsometricSprite tile,int level) 
 	{
 		switch(level)
@@ -306,6 +307,6 @@ public class IsometricMap implements Drawable
 			break;
 		}
 	}
-		
+
 }
 
