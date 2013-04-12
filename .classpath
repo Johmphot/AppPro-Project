@@ -6,7 +6,5 @@
 	<classpathentry kind="lib" path="src/given.jar"/>
 	<classpathentry kind="lib" path="src/JSON.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Work/FinalProject/iceworld.given.jar"/>
-	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Project/Json-sample-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
