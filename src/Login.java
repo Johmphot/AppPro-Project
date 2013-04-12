@@ -32,6 +32,8 @@ public class Login extends JFrame
 	 */
 	public static void main(String[] args) 
 	{
+		SplashScreen s= new SplashScreen();
+		
 		EventQueue.invokeLater(new Runnable() 
 		{
 			public void run() 
