@@ -211,7 +211,6 @@ public class Login extends JFrame
 	{
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-		immigration = new ICEWorldImmigration(user); 
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
@@ -236,7 +235,6 @@ public class Login extends JFrame
 	{
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-		immigration = new ICEWorldImmigration(user); 
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();
