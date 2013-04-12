@@ -2,6 +2,8 @@ import iceworld.given.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.border.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -110,9 +112,17 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				Customize c = new Customize();
-				c.setVisible(true);
-				c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				Customize c;
+				try {
+					c = new Customize();
+					c.setVisible(true);
+					c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//c.setVisible(true);
+				//c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			}
 		});
 		mnAccount.add(mntmCustomization);

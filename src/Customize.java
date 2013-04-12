@@ -36,6 +36,8 @@ public class Customize extends JFrame{
 	 //ImageIcon bodyIcon = new ImageIcon();
 	 JButton bDown, bUp, hDown, hUp, sDown, sUp, wDown, wUp,btnCancel, btnOk;
 	 ButtonListener b = new ButtonListener();
+	 private JLabel lblShirt;
+	 private JLabel lblWeapon;
 	 
 	public static void main(String [] args) throws IOException{
 		Customize c = new Customize();
@@ -121,7 +123,6 @@ public class Customize extends JFrame{
 				linkToImage = (String) jsonData.get("location");
 				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}	
@@ -153,7 +154,6 @@ public class Customize extends JFrame{
 				linkToImage = (String) jsonData.get("location");
 				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}	
@@ -237,7 +237,7 @@ public class Customize extends JFrame{
 		setTitle("Customize");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
-		setSize(800,600);
+		setSize(800,550);
 		getContentPane().setLayout(null);
 		
 		//JLabel body = new JLabel(getBody(1));
@@ -267,26 +267,15 @@ public class Customize extends JFrame{
 		bUp.addActionListener(b);
 		bodyPanel.add(bUp);
 		
-		JTextPane txtpnBody = new JTextPane();
-		txtpnBody.setText("Body");
-		txtpnBody.setOpaque(false);
-		txtpnBody.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		txtpnBody.setBackground(Color.WHITE);
-		txtpnBody.setBounds(97, 6, 38, 19);
-		bodyPanel.add(txtpnBody);
+		JLabel lblBody = new JLabel("Body");
+		lblBody.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblBody.setBounds(99, 6, 47, 16);
+		bodyPanel.add(lblBody);
 
 		JPanel headPanel = new JPanel();
 		headPanel.setLayout(null);
 		headPanel.setBounds(427, 106, 235, 55);
 		getContentPane().add(headPanel);
-
-		JTextPane txtpnHeadGear = new JTextPane();
-		txtpnHeadGear.setText("Head Gear");
-		txtpnHeadGear.setOpaque(false);
-		txtpnHeadGear.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		txtpnHeadGear.setBackground(Color.WHITE);
-		txtpnHeadGear.setBounds(73, 6, 86, 32);
-		headPanel.add(txtpnHeadGear);
 		
 		hDown = new JButton("<<");
 		hDown.setBounds(45, 26, 71, 29);
@@ -297,19 +286,16 @@ public class Customize extends JFrame{
 		hUp.setBounds(112, 26, 71, 29);
 		hUp.addActionListener(b);
 		headPanel.add(hUp);
+		
+		JLabel lblHeadGear = new JLabel("Head Gear");
+		lblHeadGear.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblHeadGear.setBounds(75, 6, 80, 16);
+		headPanel.add(lblHeadGear);
 
 		JPanel shirtPanel = new JPanel();
 		shirtPanel.setLayout(null);
 		shirtPanel.setBounds(427, 185, 235, 55);
 		getContentPane().add(shirtPanel);
-
-		JTextPane txtpnShirt = new JTextPane();
-		txtpnShirt.setText("     Shirt");
-		txtpnShirt.setOpaque(false);
-		txtpnShirt.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		txtpnShirt.setBackground(Color.WHITE);
-		txtpnShirt.setBounds(71, 6, 80, 32);
-		shirtPanel.add(txtpnShirt);
 		
 		sUp = new JButton(">>");
 		sUp.setBounds(112, 26, 71, 29);
@@ -320,19 +306,16 @@ public class Customize extends JFrame{
 		sDown.setBounds(45, 26, 71, 29);
 		sDown.addActionListener(b);
 		shirtPanel.add(sDown);
+		
+		lblShirt = new JLabel("Shirt");
+		lblShirt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblShirt.setBounds(96, 6, 39, 16);
+		shirtPanel.add(lblShirt);
 
 		JPanel weaponPanel = new JPanel();
 		weaponPanel.setLayout(null);
 		weaponPanel.setBounds(427, 268, 235, 55);
 		getContentPane().add(weaponPanel);
-
-		JTextPane txtpnWeapon = new JTextPane();
-		txtpnWeapon.setText("  Weapon");
-		txtpnWeapon.setOpaque(false);
-		txtpnWeapon.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		txtpnWeapon.setBackground(Color.WHITE);
-		txtpnWeapon.setBounds(78, 6, 80, 32);
-		weaponPanel.add(txtpnWeapon);
 		
 		wUp = new JButton(">>");
 		wUp.setBounds(112, 26, 71, 29);
@@ -343,6 +326,11 @@ public class Customize extends JFrame{
 		wDown.setBounds(45, 26, 71, 29);
 		wDown.addActionListener(b);
 		weaponPanel.add(wDown);
+		
+		lblWeapon = new JLabel("Weapon");
+		lblWeapon.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblWeapon.setBounds(83, 6, 80, 16);
+		weaponPanel.add(lblWeapon);
 
 		btnCancel = new JButton(" Cancel");
 		btnCancel.setBounds(427, 373, 107, 27);
@@ -476,6 +464,4 @@ public class Customize extends JFrame{
 		}
 		
 	}
-	
-		
 }
