@@ -1,9 +1,8 @@
-<<<<<<< HEAD:src/Primary/Customize.java
+
 package primary;
-=======
+
 import iceworld.given.IcetizenLook;
 
->>>>>>> Customize link to iceworld:src/Customize.java
 import java.awt.*;
 
 import java.awt.event.*;
@@ -28,7 +27,7 @@ public class Customize extends JFrame{
 	static String[] body,head, shirt, weapon;
 	JPanel draw;
 	static JSONParser json = new JSONParser();
-	 static ContainerFactory containerFactory = new ContainerFactory() {
+	static ContainerFactory containerFactory = new ContainerFactory() {
 		    public LinkedList creatArrayContainer() { return new LinkedList(); } 
 		    public Map createObjectContainer() { return new LinkedHashMap(); }
 
@@ -50,6 +49,14 @@ public class Customize extends JFrame{
 		
 		
 	}
+	
+	public static void getLook(){
+		Login.user.getIcetizenLook();
+		for(int i=0; i<body.length;i++){
+			
+		}
+	}
+	
 	public static void getGraphicsArray() throws IOException{
 		String inputLine;
 	    URL url = null;
@@ -170,7 +177,6 @@ public class Customize extends JFrame{
 	
 		return headimg;
 	}
-	
 	public static ImageIcon getShirt(int i) throws IOException{
 		URL url = null;
 		String sreq="http://iceworld.sls-atl.com/api/&cmd=gurl&gid="+shirt[i];
@@ -202,7 +208,6 @@ public class Customize extends JFrame{
 	
 		return shirtimg;
 	}
-	
 	public static ImageIcon getWeapon(int i) throws IOException{
 		URL url = null;
 		String wreq="http://iceworld.sls-atl.com/api/&cmd=gurl&gid="+weapon[i];
@@ -234,10 +239,7 @@ public class Customize extends JFrame{
 	
 		return weaponimg;
 	}
-	
-	
-	
-	
+
 	public Customize() throws IOException 
 	{
 		setTitle("Customize");
@@ -472,7 +474,8 @@ public class Customize extends JFrame{
 				look.gidS = shirt[shirtIndex];
 				look.gidW = weapon[weaponIndex];
 				Login.immigration.customization(look);
-				Login.immigration.talk("YO!!");
+				//Login.immigration.talk("YO!!");
+				Login.immigration.walk(50,50);
 				dispose();
 			}
 			
