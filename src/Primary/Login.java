@@ -1,3 +1,4 @@
+package Primary;
 import iceworld.given.*;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -25,7 +26,7 @@ public class Login extends JFrame
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
-	public static Icetizen user; 
+	public static Icetizen user;
 
 	/**
 	 * Launch the application.

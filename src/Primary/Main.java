@@ -1,7 +1,10 @@
+package Primary;
 import iceworld.given.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.border.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -110,9 +113,16 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				Customize c = new Customize();
-				c.setVisible(true);
-				c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				try 
+				{
+					Customize c = new Customize();
+					c.setVisible(true);
+					c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				} 
+				catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
 			}
 		});
 		mnAccount.add(mntmCustomization);
@@ -125,7 +135,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) Login.user);
+				ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) Primary.Login.user);
 				if(immigration.logout())
 				{
 					dispose();
