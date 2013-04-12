@@ -1,3 +1,4 @@
+package primary;
 import java.applet.AudioClip;
 import java.io.IOException;
 import java.net.URL;

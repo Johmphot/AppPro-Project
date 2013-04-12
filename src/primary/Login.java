@@ -1,8 +1,8 @@
-package Primary;
+package primary;
 import iceworld.given.*;
 
 import java.awt.EventQueue;
-import java.awt.SplashScreen;
+//import java.awt.SplashScreen;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -210,11 +210,7 @@ public class Login extends JFrame
 	public boolean userLogin(String username,String password)
 	{
 		user = new Icetizen();
-<<<<<<< HEAD:src/Primary/Login.java
-		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-=======
-		immigration = new ICEWorldImmigration(user); 
->>>>>>> Customize link to iceworld:src/Login.java
+		immigration = new ICEWorldImmigration((MyIcetizen) user);
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
@@ -236,11 +232,7 @@ public class Login extends JFrame
 	public boolean alienLogin()
 	{
 		user = new Icetizen();
-<<<<<<< HEAD:src/Primary/Login.java
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-=======
-		immigration = new ICEWorldImmigration(user); 
->>>>>>> Customize link to iceworld:src/Login.java
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();

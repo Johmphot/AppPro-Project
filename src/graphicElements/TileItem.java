@@ -1,4 +1,4 @@
-package GraphicElements;
+package graphicElements;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -17,8 +17,7 @@ public abstract class TileItem implements Drawable
 
 	public void setIsometricPoint(IsometricSprite iso)
 	{
-		if (fixed)
-			return;
+		if (fixed) return;
 
 		this.iso = iso;
 		iso.setPassable(passable);
@@ -40,7 +39,8 @@ public abstract class TileItem implements Drawable
 
 	private void setRelativePos(ArrayList<IsometricSprite> edge_point) 
 	{
-		if (edge_point.isEmpty()) {
+		if (edge_point.isEmpty()) 
+		{
 			this.edge_iso = null;
 			return;
 		}

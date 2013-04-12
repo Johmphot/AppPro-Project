@@ -1,4 +1,4 @@
-package Primary;
+package primary;
 import java.awt.EventQueue;
 
 import javax.swing.JPanel;

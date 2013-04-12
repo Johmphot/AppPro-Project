@@ -1,5 +1,5 @@
 <<<<<<< HEAD:src/Primary/Customize.java
-package Primary;
+package primary;
 =======
 import iceworld.given.IcetizenLook;
 
