@@ -88,7 +88,7 @@ import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
-public class SplashScreen {
+public class SplashScreen2 {
   public static void main(String[] arg) {
     JWindow jwin = new JWindow();
     Image image= Toolkit.getDefaultToolkit().getImage("iceworld.jpg");
