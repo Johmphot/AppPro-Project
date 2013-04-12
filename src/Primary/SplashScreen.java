@@ -17,9 +17,9 @@ public class SplashScreen extends JWindow {
 		pack();
 		// Show splash screen
 		setVisible(true);
-		// Wait for a while. In this case, 1100 milliseconds
+		// Wait for a while. In this case, 2000 milliseconds
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(2500);
 		} catch (InterruptedException e) {
 		}
 		// Dispose this SplashScreen(JWindow)

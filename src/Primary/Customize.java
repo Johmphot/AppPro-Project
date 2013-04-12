@@ -1,4 +1,9 @@
+<<<<<<< HEAD:src/Primary/Customize.java
 package Primary;
+=======
+import iceworld.given.IcetizenLook;
+
+>>>>>>> Customize link to iceworld:src/Customize.java
 import java.awt.*;
 
 import java.awt.event.*;
@@ -460,6 +465,15 @@ public class Customize extends JFrame{
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+			}else if(source==btnOk){
+				IcetizenLook look = new IcetizenLook();
+				look.gidB = body[bodyIndex];
+				look.gidH = head[headIndex];
+				look.gidS = shirt[shirtIndex];
+				look.gidW = weapon[weaponIndex];
+				Login.immigration.customization(look);
+				Login.immigration.talk("YO!!");
+				dispose();
 			}
 			
 		}
