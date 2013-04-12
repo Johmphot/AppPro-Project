@@ -1,6 +1,8 @@
 package Primary;
 import iceworld.given.*;
 import java.awt.EventQueue;
+import java.awt.SplashScreen;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -27,12 +29,15 @@ public class Login extends JFrame
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	public static Icetizen user;
+	public static ICEWorldImmigration immigration;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) 
 	{
+		SplashScreen s= new SplashScreen();
+		
 		EventQueue.invokeLater(new Runnable() 
 		{
 			public void run() 
@@ -203,7 +208,7 @@ public class Login extends JFrame
 	public boolean userLogin(String username,String password)
 	{
 		user = new Icetizen();
-		ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) user); 
+		immigration = new ICEWorldImmigration((MyIcetizen) user); 
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
@@ -225,7 +230,7 @@ public class Login extends JFrame
 	public boolean alienLogin()
 	{
 		user = new Icetizen();
-		ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) user); 
+		immigration = new ICEWorldImmigration((MyIcetizen) user); 
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();

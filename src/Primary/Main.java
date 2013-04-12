@@ -113,6 +113,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+
 				try 
 				{
 					Customize c = new Customize();
@@ -123,6 +124,16 @@ public class Main extends JFrame {
 				{
 					e1.printStackTrace();
 				}
+				Customize c;
+				try {
+					c = new Customize();
+					c.setVisible(true);
+					c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		mnAccount.add(mntmCustomization);
