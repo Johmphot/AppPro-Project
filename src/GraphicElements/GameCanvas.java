@@ -26,14 +26,13 @@ public class GameCanvas extends Canvas implements Runnable
 	private volatile boolean active = true;
 	private BufferStrategy buffer;
 	private Graphics graphics;
-	private ToolMenu toolMenu = new ToolMenu();
 
 	private Thread thread = null;
 
 	public GameCanvas() 
 	{
 		setup();
-		addMouseWheelListener(new MouseWheelListener() 
+		/*addMouseWheelListener(new MouseWheelListener() 
 		{
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent arg0) 
@@ -44,7 +43,7 @@ public class GameCanvas extends Canvas implements Runnable
 				}
 
 			}
-		});
+		});*/
 		addMouseMotionListener(new MouseMotionListener() 
 		{
 
@@ -52,21 +51,14 @@ public class GameCanvas extends Canvas implements Runnable
 			public void mouseMoved(MouseEvent e) 
 			{
 				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				if (!toolMenu.isActive()) 
-				{
-					iso.setMousePoint(e.getPoint());
-				} 
-				else 
-				{
-					toolMenu.mouseAction(e);
-				}
+				iso.setMousePoint(e.getPoint());
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) 
 			{
 				// Drag starts with button 3
-				if (e.getModifiersEx() == 4096 && !toolMenu.isActive()) 
+				if (e.getModifiersEx() == 4096) 
 				{
 					iso.setDragged(true);
 					iso.setMousePoint(e.getPoint());
@@ -143,14 +135,6 @@ public class GameCanvas extends Canvas implements Runnable
 		}
 		// Renders map
 		renderMap(graphics);
-		renderToolMenu(graphics);
-	}
-	private void renderToolMenu(Graphics g) 
-	{
-		if (toolMenu.isActive()) 
-		{
-			toolMenu.draw(g);
-		}
 	}
 
 	public void renderMap(Graphics g)
