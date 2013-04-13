@@ -1,4 +1,4 @@
-package GraphicElements;
+package graphicElements;
 
 import javax.swing.JPanel;
 

@@ -1,4 +1,4 @@
-package Primary;
+package primary;
 import java.applet.*; import java.net.*;
 
 import javax.swing.JApplet;

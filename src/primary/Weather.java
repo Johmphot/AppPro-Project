@@ -1,4 +1,4 @@
-package Primary;
+package primary;
 import java.awt.*;
 import java.io.*;
 import java.net.MalformedURLException;

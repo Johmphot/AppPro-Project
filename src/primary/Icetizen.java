@@ -1,4 +1,4 @@
-package Primary;
+package primary;
 
 import iceworld.given.IcetizenLook;
 import iceworld.given.MyIcetizen;

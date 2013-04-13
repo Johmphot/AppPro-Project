@@ -1,4 +1,4 @@
-package Primary;
+package primary;
 import iceworld.given.*;
 import java.awt.*;
 import javax.swing.*;
@@ -164,7 +164,7 @@ public class Main extends JFrame {
 		contentPane.add(typeBox);
 		typeBox.setColumns(10);
 
-		final GraphicElements.Window window = new GraphicElements.Window();
+		final graphicElements.Window window = new graphicElements.Window();
 		window.setBounds(6, 6, 964, 512);
 		contentPane.add(window);
 

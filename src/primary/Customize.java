@@ -1,4 +1,5 @@
-package Primary;
+
+package primary;
 
 import iceworld.given.IcetizenLook;
 
@@ -27,7 +28,7 @@ public class Customize extends JFrame{
 	static String[] body,head, shirt, weapon;
 	JPanel draw;
 	static JSONParser json = new JSONParser();
-	 static ContainerFactory containerFactory = new ContainerFactory() {
+	static ContainerFactory containerFactory = new ContainerFactory() {
 		    public LinkedList creatArrayContainer() { return new LinkedList(); } 
 		    public Map createObjectContainer() { return new LinkedHashMap(); }
 

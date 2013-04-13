@@ -1,4 +1,4 @@
-package GraphicElements;
+package graphicElements;
 import java.awt.Graphics;
 
 public interface Drawable

@@ -1,4 +1,4 @@
-package Primary;
+package primary;
 import iceworld.given.*;
 
 import java.awt.EventQueue;
@@ -210,7 +210,15 @@ public class Login extends JFrame
 	public boolean userLogin(String username,String password)
 	{
 		user = new Icetizen();
+<<<<<<< HEAD:src/primary/Login.java
+		immigration = new ICEWorldImmigration((MyIcetizen) user);
+=======
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
+<<<<<<< HEAD:src/Primary/Login.java
+=======
+		immigration = new ICEWorldImmigration(user); 
+>>>>>>> 3e3f134a235bacfa0f2affa0173e99e598aae1b2:src/Primary/Login.java
+>>>>>>> 57a710f6d2bd60b25e6cdf42745b7604487fa513:src/primary/Login.java
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
@@ -235,6 +243,13 @@ public class Login extends JFrame
 	{
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
+<<<<<<< HEAD:src/Primary/Login.java
+=======
+<<<<<<< HEAD:src/primary/Login.java
+=======
+		immigration = new ICEWorldImmigration(user); 
+>>>>>>> 3e3f134a235bacfa0f2affa0173e99e598aae1b2:src/Primary/Login.java
+>>>>>>> 57a710f6d2bd60b25e6cdf42745b7604487fa513:src/primary/Login.java
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();

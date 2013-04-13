@@ -1,4 +1,4 @@
-package GraphicElements;
+package graphicElements;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;

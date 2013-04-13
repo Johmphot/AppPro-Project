@@ -1,4 +1,4 @@
-package GraphicElements;
+package graphicElements;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -32,18 +32,6 @@ public class GameCanvas extends Canvas implements Runnable
 	public GameCanvas() 
 	{
 		setup();
-		/*addMouseWheelListener(new MouseWheelListener() 
-		{
-			@Override
-			public void mouseWheelMoved(MouseWheelEvent arg0) 
-			{
-				if (toolMenu.isActive()) 
-				{
-					toolMenu.mouseWheelAction(arg0);
-				}
-
-			}
-		});*/
 		addMouseMotionListener(new MouseMotionListener() 
 		{
 
@@ -55,27 +43,12 @@ public class GameCanvas extends Canvas implements Runnable
 			}
 
 			@Override
-			public void mouseDragged(MouseEvent e) 
-			{
-				// Drag starts with button 3
-				if (e.getModifiersEx() == 4096) 
-				{
-					iso.setDragged(true);
-					iso.setMousePoint(e.getPoint());
-				}
-			}
+			public void mouseDragged(MouseEvent e) {}
 		});
 		addMouseListener(new MouseListener()
 		{
 			@Override
-			public void mouseReleased(MouseEvent e) 
-			{
-				// Mouse3 is released
-				if (e.getButton() == 3) 
-				{
-					iso.setDragged(false);
-				}
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
 			public void mousePressed(MouseEvent e) {}
@@ -91,8 +64,10 @@ public class GameCanvas extends Canvas implements Runnable
 			{
 				if(arg0.getButton()==1)
 				{
-					System.out.println(Translator.toGrid(iso.getPoint(getMousePosition().getLocation())));
-					//System.out.println(iso.getPoint(getMousePosition().getLocation()));
+					int x = Translator.toGrid(iso.getPoint(getMousePosition().getLocation())).x;
+					int y = Translator.toGrid(iso.getPoint(getMousePosition().getLocation())).y;
+					System.out.println(x+","+y);
+					primary.Login.immigration.walk(x, y);
 				}
 			}
 		});
