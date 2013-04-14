@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,6 +23,7 @@ public class GameCanvas extends Canvas implements Runnable
 	private final int WIDTH = 964;
 
 	public IsometricMap iso = null;
+	private IsometricSprite lastTile;
 
 	private volatile boolean active = true;
 	private BufferStrategy buffer;
@@ -64,10 +66,14 @@ public class GameCanvas extends Canvas implements Runnable
 			{
 				if(arg0.getButton()==1)
 				{
-					int x = Translator.toGrid(iso.getPoint(getMousePosition().getLocation())).x;
-					int y = Translator.toGrid(iso.getPoint(getMousePosition().getLocation())).y;
+					IsometricSprite tile = iso.getPoint(getMousePosition().getLocation());
+					int x = Translator.toGrid(tile).x;
+					int y = Translator.toGrid(tile).y;
 					System.out.println(x+","+y);
-					primary.Login.immigration.walk(x, y);
+					lastTile.setFocused(false);
+					lastTile = tile;
+					tile.setFocused(true);
+					//primary.Login.immigration.walk(x, y);
 				}
 			}
 		});
@@ -141,6 +147,7 @@ public class GameCanvas extends Canvas implements Runnable
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setSize(WIDTH, HEIGHT);
 		setVisible(true);
+		lastTile = new IsometricSprite(0,0);
 	}
 
 	public void addNotify() 
@@ -172,6 +179,11 @@ public class GameCanvas extends Canvas implements Runnable
 			iso = new IsometricMap();
 			iso.start();
 		}
+	}
+	
+	private void setCurrentPosition(IsometricSprite iso)
+	{
+		iso.setFocused(true);
 	}
 
 }
