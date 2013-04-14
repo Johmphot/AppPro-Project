@@ -3,7 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Project/Json-sample-1.1.1.jar"/>
+=======
+	<classpathentry kind="lib" path="src/given.jar"/>
+	<classpathentry kind="lib" path="src/JSON.jar"/>
+>>>>>>> 419772cac2a6b7ceb764893874a7c32bf6641e6c
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Work/FinalProject/iceworld.given.jar"/>
 	<classpathentry kind="output" path="bin"/>

@@ -17,8 +17,8 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public IcetizenLook getIcetizenLook()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		IcetizenLook look = new IcetizenLook();
+		return look;
 	}
 
 	@Override

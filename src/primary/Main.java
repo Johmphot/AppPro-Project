@@ -12,7 +12,8 @@ import javax.swing.event.ChangeEvent;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField typeBox;
+	String chatDialogue="";
 
 	/**
 	 * Launch the application.
@@ -157,10 +158,10 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		textField = new JTextField();
-		textField.setBounds(15, 668, 230, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		typeBox = new JTextField();
+		typeBox.setBounds(15, 668, 230, 28);
+		contentPane.add(typeBox);
+		typeBox.setColumns(10);
 
 		final graphicElements.Window window = new graphicElements.Window();
 		window.setBounds(6, 6, 964, 512);
@@ -171,10 +172,22 @@ public class Main extends JFrame {
 		controlPanel.setBounds(277, 525, 741, 193);
 		contentPane.add(controlPanel);
 		controlPanel.setLayout(null);
+		
+		final JTextArea chatBox = new JTextArea();
+		chatBox.setBounds(15, 530, 230, 122);
+		contentPane.add(chatBox);
 
 		JButton btnTalk = new JButton("Talk");
 		btnTalk.setBounds(29, 141, 60, 20);
 		controlPanel.add(btnTalk);
+		btnTalk.addActionListener(new ActionListener()
+		{
+		     public void actionPerformed(ActionEvent ae)
+		     {
+		    	 chatDialogue+= typeBox.getText()+"\n";
+		          chatBox.setText(chatDialogue);
+		     }
+		});
 
 		JButton btnYell = new JButton("Yell");
 		btnYell.setBounds(101, 141, 60, 20);
@@ -198,10 +211,6 @@ public class Main extends JFrame {
 		weatherPanel.setBackground(Color.WHITE);
 		weatherPanel.setBounds(229, 50, 121, 98);
 		controlPanel.add(weatherPanel);
-
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(15, 530, 230, 122);
-		contentPane.add(textArea);
 
 		JLabel lblZoom = new JLabel("Zoom");
 		lblZoom.setBounds(982, 6, 36, 16);

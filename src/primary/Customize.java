@@ -24,6 +24,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
 
 public class Customize extends JFrame{
+	static IcetizenLook look= Login.user.getIcetizenLook();
 	static String[] body,head, shirt, weapon;
 	JPanel draw;
 	static JSONParser json = new JSONParser();
@@ -37,7 +38,7 @@ public class Customize extends JFrame{
 	 JLabel shirtLabel= new JLabel();
 	 JLabel weaponLabel = new JLabel();
 	 ImageIcon bodyIcon = new ImageIcon(),headIcon= new ImageIcon(),shirtIcon =new ImageIcon(),weaponIcon= new ImageIcon();
-	 int bodyIndex = 0, headIndex =0, shirtIndex=0, weaponIndex=0;
+	 static int bodyIndex = 0, headIndex =0, shirtIndex=0, weaponIndex=0;
 	 //ImageIcon bodyIcon = new ImageIcon();
 	 JButton bDown, bUp, hDown, hUp, sDown, sUp, wDown, wUp,btnCancel, btnOk;
 	 ButtonListener b = new ButtonListener();
@@ -51,9 +52,22 @@ public class Customize extends JFrame{
 	}
 	
 	public static void getLook(){
-		Login.user.getIcetizenLook();
+		//IcetizenLook l= Login.user.getIcetizenLook();
 		for(int i=0; i<body.length;i++){
-			
+			if(body[i]== look.gidB)
+				bodyIndex=i;
+		}
+		for(int i=0; i<head.length;i++){
+			if(head[i]== look.gidH)
+				headIndex=i;
+		}
+		for(int i=0; i<shirt.length;i++){
+			if(shirt[i]== look.gidS)
+				shirtIndex=i;
+		}
+		for(int i=0; i<weapon.length;i++){
+			if(weapon[i]== look.gidW)
+				weaponIndex=i;
 		}
 	}
 	
@@ -257,7 +271,7 @@ public class Customize extends JFrame{
 		draw.setLayout(null);
 		
 		this.getGraphicsArray();
-		
+		getLook();
 		
 		
 		JPanel bodyPanel = new JPanel();
@@ -468,14 +482,14 @@ public class Customize extends JFrame{
 						e1.printStackTrace();
 					}
 			}else if(source==btnOk){
-				IcetizenLook look = new IcetizenLook();
+				//IcetizenLook look = new IcetizenLook();
 				look.gidB = body[bodyIndex];
 				look.gidH = head[headIndex];
 				look.gidS = shirt[shirtIndex];
 				look.gidW = weapon[weaponIndex];
 				Login.immigration.customization(look);
 				//Login.immigration.talk("YO!!");
-				Login.immigration.walk(50,50);
+				Login.immigration.yell("ARGGGG");
 				dispose();
 			}
 			
