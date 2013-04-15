@@ -1,14 +1,22 @@
 package primary;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+
 import iceworld.given.IcetizenLook;
 import iceworld.given.MyIcetizen;
 
 public class Icetizen implements MyIcetizen
 {
-	int portID, listeningPort;
-	String username;
+	public String uid, ip;
+	int port, portID, listeningPort, type, x, y;
+	public String username;
+
 
 	@Override
+	
 	public int getIcePortID() 
 	{
 		return portID;
@@ -16,11 +24,26 @@ public class Icetizen implements MyIcetizen
 
 	@Override
 	public IcetizenLook getIcetizenLook()
-	{
+	{	
 		IcetizenLook look = new IcetizenLook();
 		return look;
 	}
 
+	public IcetizenLook getLook(String uid){
+		String inputLine;
+	    URL url = null;
+		url= new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+uid);
+		//{"status":1,"data":["B001","B002","B003","B004","B005","B006","B007",......
+		URLConnection connection = url.openConnection();
+		connection.connect();
+		BufferedReader temp = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		while ((inputLine = temp.readLine()) != null) 
+		{		
+		String datArray = inputLine.substring(inputLine.lastIndexOf("["));
+		for(int i=0;i<datArray.length();i++){
+		
+	}
+	
 	@Override
 	public int getListeningPort() 
 	{
@@ -40,10 +63,11 @@ public class Icetizen implements MyIcetizen
 	}
 
 	@Override
-	public void setIcetizenLook(IcetizenLook arg0) 
+	public void setIcetizenLook(IcetizenLook look) 
 	{
-		// TODO Auto-generated method stub
-
+		
+		
+		//Login.immigration.customization(look);
 	}
 
 	@Override
@@ -57,5 +81,11 @@ public class Icetizen implements MyIcetizen
 	{
 		username = arg0;
 	}
-
+	
+	public void setUID(String uid){
+		this.uid=uid;
+	}
+	
+	
+	
 }

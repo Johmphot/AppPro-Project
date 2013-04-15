@@ -242,6 +242,7 @@ public class Login extends JFrame
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
 
+		
 		immigration = new ICEWorldImmigration(user); 
 
 		user.setIcePortID(253); //Port ID 253
