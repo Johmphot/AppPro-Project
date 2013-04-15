@@ -20,16 +20,20 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import org.json.simple.parser.ParseException;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.util.LinkedList;
 
 public class Login extends JFrame 
 {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
-	public static Icetizen user;
+	public static Icetizen myUser;
 	public static ICEWorldImmigration immigration;
 
 	/**
@@ -47,6 +51,7 @@ public class Login extends JFrame
 				try 
 				{
 					Login frame = new Login();
+					
 					frame.setVisible(true);
 				} 
 				catch (Exception e) 
@@ -182,6 +187,7 @@ public class Login extends JFrame
 					Main world = new Main(name);
 					dispose();
 					world.setVisible(true);
+					
 				}
 				else
 				{
@@ -218,23 +224,21 @@ public class Login extends JFrame
 
 	public boolean userLogin(String username,String password)
 	{
-		user = new Icetizen();
-		immigration = new ICEWorldImmigration((MyIcetizen) user);
-		user.setIcePortID(253); //Port ID 253
-		user.setUsername(username);
-		user.setListeningPort(10018);
-		user.look = new IcetizenLook();
-		if(user.look.gidB==null){
-		user.look.gidB = "B001";
-		user.look.gidH = "H001";
-		user.look.gidS = "S001";
-		user.look.gidW = "W001";
-		}
-	
+		myUser = new Icetizen();
+		immigration = new ICEWorldImmigration((MyIcetizen) myUser);
+		myUser.setIcePortID(253); //Port ID 253
+		myUser.setUsername(username);
+		myUser.setListeningPort(10018);
 		if(immigration.login(password))
 		{
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			LinkedList<Icetizen> user = new LinkedList<Icetizen>();
+			Fetch a = new Fetch(user);
+			a.start();
+			try {
+				myUser.fetchLook();
+			} catch (ParseException e) {}
 			return true;
 		}
 		else return false;
@@ -242,10 +246,10 @@ public class Login extends JFrame
 
 	public boolean alienLogin()
 	{
-		user = new Icetizen();
-		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-		user.setIcePortID(253); //Port ID 253
-		user.setListeningPort(10018);
+		myUser = new Icetizen();
+		immigration = new ICEWorldImmigration((MyIcetizen) myUser); 
+		myUser.setIcePortID(253); //Port ID 253
+		myUser.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();
 		look.gidB = "B001";
 		look.gidH = "H001";

@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7"/>
-	<classpathentry kind="lib" path="given.jar"/>
-	<classpathentry kind="lib" path="JSON.jar"/>
-	<classpathentry kind="src" path="src"/>
-=======
-<<<<<<< HEAD
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Project/Json-sample-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Work/FinalProject/iceworld.given.jar"/>
-=======
 	<classpathentry kind="lib" path="src/given.jar"/>
 	<classpathentry kind="lib" path="src/JSON.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7"/>
->>>>>>> 54e8fee1b71215fc791daef9326625da81f1d7fe
->>>>>>> 516096be8d579507d1543ea2453269f2a515861d
 	<classpathentry kind="output" path="bin"/>
 </classpath>
