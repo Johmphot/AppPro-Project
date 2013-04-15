@@ -487,10 +487,11 @@ public class Customize extends JFrame{
 				look.gidH = head[headIndex];
 				look.gidS = shirt[shirtIndex];
 				look.gidW = weapon[weaponIndex];
-				primary.Login.user.setIcetizenLook(look);
+
 				Login.immigration.customization(look);
+				Login.user.setIcetizenLook(look);
+				//Login.immigration.customization(look);
 				//Login.immigration.talk("YO!!");
-				Login.immigration.yell("ARGGGG");
 				dispose();
 				graphicElements.Window.canvas.repaint();
 			}
