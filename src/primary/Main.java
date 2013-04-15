@@ -91,6 +91,14 @@ public class Main extends JFrame {
 		mnFile.add(separator_1);
 
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				About ab = new About();
+				ab.setVisible(true);
+			}
+		});
 		mnFile.add(mntmAbout);
 
 		JSeparator separator = new JSeparator();
@@ -100,6 +108,7 @@ public class Main extends JFrame {
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				Login.immigration.logout();
 				System.exit(0);
 			}
 		});
@@ -174,6 +183,7 @@ public class Main extends JFrame {
 		controlPanel.setLayout(null);
 		
 		final JTextArea chatBox = new JTextArea();
+		chatBox.setEditable(false);
 		chatBox.setBounds(15, 530, 230, 122);
 		contentPane.add(chatBox);
 

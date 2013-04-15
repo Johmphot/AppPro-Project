@@ -4,24 +4,27 @@ import java.awt.Point;
 
 public class Translator 
 {
+	private static int subtractor = 0;
+	
 	//convert to ordinary (x,y) coordinate 
 	public static Point toGrid(IsometricSprite p) 
 	{
-		int xn = p.getX() - subtractor(p); 
+		subtractor = getSubtractor(p);
+		int xn = p.getX() - subtractor; 
 		int yn = p.getY() - xn;
 		Point result = new Point(xn,yn);
 		return result;
 	}
 	
-	/*public IsometricSprite toIso(Point p)
+	public Point toIso(Point p)
 	{
-		int xn = p.x;
-		int yn = p.y;
-		IsometricSprite result;
+		int oy = p.y + p.x;
+		int ox = p.x + (99 - p.y);
+		Point result = new Point(ox,oy);
 		return result;
-	}*/
+	}
 	
-	public static int subtractor(IsometricSprite p)
+	public static int getSubtractor(IsometricSprite p)
 	{
 		int x = p.getX();
 		int y = p.getY();

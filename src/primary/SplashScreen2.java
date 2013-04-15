@@ -32,7 +32,6 @@ public class SplashScreen2 {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-
     jwin.setVisible(false);
     jwin.dispose();
   }

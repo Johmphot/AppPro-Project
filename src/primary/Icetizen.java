@@ -7,6 +7,7 @@ public class Icetizen implements MyIcetizen
 {
 	int portID, listeningPort;
 	String username;
+	IcetizenLook look;
 
 	@Override
 	public int getIcePortID() 
@@ -17,7 +18,6 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public IcetizenLook getIcetizenLook()
 	{
-		IcetizenLook look = new IcetizenLook();
 		return look;
 	}
 
@@ -42,8 +42,7 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public void setIcetizenLook(IcetizenLook arg0) 
 	{
-		// TODO Auto-generated method stub
-
+		look = arg0;
 	}
 
 	@Override
