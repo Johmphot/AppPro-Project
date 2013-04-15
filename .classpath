@@ -2,7 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Work/FinalProject/iceworld.given.jar"/>
 	<classpathentry kind="lib" path="/Users/johmphot/Documents/Textbook&amp;Sheet/App Pro/Project/Json-sample-1.1.1.jar"/>
+=======
+	<classpathentry kind="lib" path="src/given.jar"/>
+	<classpathentry kind="lib" path="src/JSON.jar"/>
+>>>>>>> 12d8997a1609589343a339ea3299cd9a49973b80
 	<classpathentry kind="output" path="bin"/>
 </classpath>

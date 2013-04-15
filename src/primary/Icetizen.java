@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.*;
+
+import org.json.simple.parser.ContainerFactory;
+import org.json.simple.parser.JSONParser;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import iceworld.given.IcetizenLook;
 import iceworld.given.MyIcetizen;
@@ -20,6 +26,12 @@ public class Icetizen implements MyIcetizen
 	int port, portID, listeningPort, type, x, y;
 	public String username;
 	BufferedImage img;
+	static JSONParser json = new JSONParser();
+	 static ContainerFactory containerFactory = new ContainerFactory() {
+		    public List creatArrayContainer() { return new LinkedList(); } 
+		    public Map createObjectContainer() { return new LinkedHashMap(); }
+
+	 };
 
 	@Override
 	
@@ -33,19 +45,41 @@ public class Icetizen implements MyIcetizen
 	{	
 		return look;
 	}
+	
 
-	public IcetizenLook getLook(String uid){
-		String inputLine;
-	    URL url = null;
-		url= new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+uid);
-		//{"status":1,"data":["B001","B002","B003","B004","B005","B006","B007",......
-		URLConnection connection = url.openConnection();
-		connection.connect();
-		BufferedReader temp = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		while ((inputLine = temp.readLine()) != null) 
-		{		
-			
+	public void fetchLook() throws org.json.simple.parser.ParseException{
+		IcetizenLook lookk = new IcetizenLook();
+		String inputLine = "";
+		try
+	    {
+	      URL url = new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+uid);
+	      URLConnection urlc = url.openConnection();
+	      BufferedReader in = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+	      String buffs;
+	      while ((buffs = in.readLine()) != null)
+	      {
+	        inputLine = inputLine + buffs;
+	      }
+	      in.close();
+	    }
+	    catch (Exception e)
+	    {
+	      System.out.println("Error");
+	    }
+		List<Map> jsonData = null;
+		try {
+			Map jsonMap = (Map)json.parse(inputLine, containerFactory);
+			jsonData = (List<Map>)jsonMap.get("data");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		lookk.gidH = ((String) jsonData.get(0).get("H")==null) ? "H008": (String) jsonData.get(0).get("H");
+		lookk.gidB = ((String) jsonData.get(0).get("B")==null) ? "B001": (String) jsonData.get(0).get("B");
+		lookk.gidW = ((String) jsonData.get(0).get("W")==null) ? "S019": (String) jsonData.get(0).get("W");
+		lookk.gidS = ((String) jsonData.get(0).get("S")==null) ? "W050": (String) jsonData.get(0).get("S");
+		this.setIcetizenLook(lookk);
+		System.out.print(username+look.gidB);
 	}
 	
 	@Override
@@ -59,18 +93,22 @@ public class Icetizen implements MyIcetizen
 	{
 		return username;
 	}
+	
+	public String getUID(){
+		return uid;
+	}
 
 	@Override
 	public void setIcePortID(int id) 
 	{
 		portID = id;
 	}
+	
 
 	@Override
 	public void setIcetizenLook(IcetizenLook look) 
 	{
-		this.look = look;
-		Login.immigration.customization(look);
+		this.look=look;
 	}
 
 	@Override
@@ -80,9 +118,9 @@ public class Icetizen implements MyIcetizen
 	}
 
 	@Override
-	public void setUsername(String arg0) 
+	public void setUsername(String username) 
 	{
-		username = arg0;
+		this.username = username;
 	}
 	
 	public void setUID(String uid){

@@ -24,7 +24,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
 
 public class Customize extends JFrame{
-	static IcetizenLook look = primary.Login.user.getIcetizenLook();
+	static IcetizenLook looks= Login.myUser.getIcetizenLook();
 	static String[] body,head, shirt, weapon;
 	JPanel draw;
 	static JSONParser json = new JSONParser();
@@ -49,26 +49,28 @@ public class Customize extends JFrame{
 	 
 	public static void main(String [] args) throws IOException{
 		Customize c = new Customize();
-		
+
 		
 	}
 	
 	public static void getLook(){
+		//looks.gidB="B101";
+		//IcetizenLook look= Login.user.getIcetizenLook();
 		//IcetizenLook l= Login.user.getIcetizenLook();
 		for(int i=0; i<body.length;i++){
-			if(body[i]== look.gidB)
+			if(body[i].equalsIgnoreCase(looks.gidB))
 				bodyIndex=i;
 		}
 		for(int i=0; i<head.length;i++){
-			if(head[i]== look.gidH)
+			if(head[i].equalsIgnoreCase(looks.gidH))
 				headIndex=i;
 		}
 		for(int i=0; i<shirt.length;i++){
-			if(shirt[i]== look.gidS)
+			if(shirt[i].equalsIgnoreCase(looks.gidS))
 				shirtIndex=i;
 		}
 		for(int i=0; i<weapon.length;i++){
-			if(weapon[i]== look.gidW)
+			if(weapon[i].equalsIgnoreCase(looks.gidW))
 				weaponIndex=i;
 		}
 	}
@@ -485,10 +487,10 @@ public class Customize extends JFrame{
 					}
 			}else if(source==btnOk){
 				//IcetizenLook look = new IcetizenLook();
-				look.gidB = body[bodyIndex];
-				look.gidH = head[headIndex];
-				look.gidS = shirt[shirtIndex];
-				look.gidW = weapon[weaponIndex];
+				looks.gidB = body[bodyIndex];
+				looks.gidH = head[headIndex];
+				looks.gidS = shirt[shirtIndex];
+				looks.gidW = weapon[weaponIndex];
 
 				Login.immigration.customization(look);
 				Login.user.setIcetizenLook(look);
@@ -497,7 +499,8 @@ public class Customize extends JFrame{
 				//Login.immigration.customization(look);
 				//Login.immigration.talk("YO!!");
 				dispose();
-				//graphicElements.Window.canvas.repaint();
+			}else if(source==btnCancel){
+				dispose();
 			}
 			
 		}
