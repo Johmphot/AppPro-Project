@@ -17,6 +17,7 @@ public class Fetch implements Runnable {
 		    public Map createObjectContainer() { return new LinkedHashMap(); }
 
 	 };
+	 Map jsonMap, jsonData, weather, iceTizen, jsonUserDetail, jsonUser, lastKnown;
 	 
 	public Fetch(LinkedList<Icetizen> user){
 		this.user = user;
@@ -39,18 +40,18 @@ public class Fetch implements Runnable {
 		     System.err.println("Error");
 		 }
 		try {
-			Map jsonMap = (Map)this.json.parse(inputLine, this.containerFactory);
-			Map jsonData = (Map)jsonMap.get("data");
-			Map weather = (Map)jsonData.get("weather");
-			Map iceTizen = (Map)jsonData.get("icetizen");
+			jsonMap = (Map)this.json.parse(inputLine, this.containerFactory);
+			jsonData = (Map)jsonMap.get("data");
+			weather = (Map)jsonData.get("weather");
+			iceTizen = (Map)jsonData.get("icetizen");
 			int size = iceTizen.size();
 			Object [] key = iceTizen.keySet().toArray();
 			for(int i=0 ; i<size ; i++){
 				Icetizen n = new Icetizen();
 				n.setUID((String)key[i]);
-				Map jsonUserDetail = (Map)iceTizen.get(key[i]);
-				Map jsonUser = (Map)jsonUserDetail.get("user");
-				Map lastKnown = (Map)jsonUserDetail.get("last_known_destination");
+				jsonUserDetail = (Map)iceTizen.get(key[i]);
+				jsonUser = (Map)jsonUserDetail.get("user");
+				lastKnown = (Map)jsonUserDetail.get("last_known_destination");
 				n.username = (String) jsonUser.get("username");
 				//System.out.println(n.username);
 				n.type = Integer.parseInt(jsonUser.get("type").toString());
@@ -75,12 +76,8 @@ public class Fetch implements Runnable {
 	public static void main(String [] args){
 		LinkedList<Icetizen> user = new LinkedList<Icetizen>();
 		new Fetch(user);
-		while(user.
+		//while(user.
 	}
-
-	
-	
-	
 	
 	
 	/*int REFRESH_INTERVAL;

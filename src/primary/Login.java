@@ -222,7 +222,8 @@ public class Login extends JFrame
 	public boolean userLogin(String username,String password)
 	{
 		user = new Icetizen();
-<<<<<<< HEAD
+
+		
 
 		immigration = new ICEWorldImmigration((MyIcetizen) user);
 		
@@ -230,9 +231,9 @@ public class Login extends JFrame
 
 		immigration = new ICEWorldImmigration(user); 
 
-=======
+
 		immigration = new ICEWorldImmigration((MyIcetizen) user);
->>>>>>> 3bde0b3979f72a338497ca6bcb8798da179b7ac9
+
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
@@ -257,13 +258,12 @@ public class Login extends JFrame
 	{
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-<<<<<<< HEAD
+
 
 		
 		immigration = new ICEWorldImmigration(user); 
 
-=======
->>>>>>> 3bde0b3979f72a338497ca6bcb8798da179b7ac9
+
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();

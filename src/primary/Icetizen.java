@@ -39,9 +39,8 @@ public class Icetizen implements MyIcetizen
 		BufferedReader temp = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 		while ((inputLine = temp.readLine()) != null) 
 		{		
-		String datArray = inputLine.substring(inputLine.lastIndexOf("["));
-		for(int i=0;i<datArray.length();i++){
-		
+			
+		}
 	}
 	
 	@Override
