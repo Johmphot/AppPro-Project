@@ -137,8 +137,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ICEWorldImmigration immigration = new ICEWorldImmigration((MyIcetizen) Login.user);
-				if(immigration.logout())
+				if(Login.immigration.logout())
 				{
 					dispose();
 					Login newFrame = new Login();

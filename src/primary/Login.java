@@ -2,7 +2,6 @@ package primary;
 import iceworld.given.*;
 
 import java.awt.EventQueue;
-//import java.awt.SplashScreen;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +22,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Login extends JFrame 
 {
@@ -118,6 +118,17 @@ public class Login extends JFrame
 		mnFile.add(separator);
 
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JFrame about = new JFrame("About");
+				About ab = new About();
+				about.getContentPane().add(ab);
+				about.setSize(980, 351);
+				about.setVisible(true);
+			}
+		});
 		mnFile.add(mntmAbout);
 
 		JSeparator separator_1 = new JSeparator();
@@ -141,6 +152,7 @@ public class Login extends JFrame
 		mntmHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnHelp.add(mntmHelpContents);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -210,6 +222,7 @@ public class Login extends JFrame
 	public boolean userLogin(String username,String password)
 	{
 		user = new Icetizen();
+<<<<<<< HEAD
 
 		immigration = new ICEWorldImmigration((MyIcetizen) user);
 		
@@ -217,6 +230,9 @@ public class Login extends JFrame
 
 		immigration = new ICEWorldImmigration(user); 
 
+=======
+		immigration = new ICEWorldImmigration((MyIcetizen) user);
+>>>>>>> 3bde0b3979f72a338497ca6bcb8798da179b7ac9
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
@@ -241,10 +257,13 @@ public class Login extends JFrame
 	{
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
+<<<<<<< HEAD
 
 		
 		immigration = new ICEWorldImmigration(user); 
 
+=======
+>>>>>>> 3bde0b3979f72a338497ca6bcb8798da179b7ac9
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();
@@ -260,6 +279,4 @@ public class Login extends JFrame
 		}
 		else return false;
 	}
-
-
 }

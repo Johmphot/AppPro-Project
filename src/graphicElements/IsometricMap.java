@@ -138,7 +138,6 @@ public class IsometricMap implements Drawable
 				if (y + 1 == rows && x == tilesInRow / 2) 
 				{
 					focusPoint = tmp_point;
-					tmp_ip.setFocused(true);
 
 				}
 			}

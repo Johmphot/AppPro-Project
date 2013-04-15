@@ -1,10 +1,14 @@
 package graphicElements;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 
 public class IsometricSprite implements Drawable
@@ -81,11 +85,12 @@ public class IsometricSprite implements Drawable
 	 * @param g
 	 */
 	public int n =1;
-	public void drawPoint(Graphics g) 
+	public void drawPoint(Graphics g)
 	{
 		rect = poly.getBounds();
 		g.setColor(Color.black);
 		g.drawString("(" + x + "," + y + ")"+n, rect.x + width - 12, rect.y + height + 5);
+		
 	}
 
 	@Override
