@@ -44,6 +44,8 @@ public class Customize extends JFrame{
 	 ButtonListener b = new ButtonListener();
 	 private JLabel lblShirt;
 	 private JLabel lblWeapon;
+	
+	 public static boolean lookChange = false;
 	 
 	public static void main(String [] args) throws IOException{
 		Customize c = new Customize();
@@ -490,6 +492,8 @@ public class Customize extends JFrame{
 
 				Login.immigration.customization(look);
 				Login.user.setIcetizenLook(look);
+				//lookChange = true;
+				Login.user.setImage(bodyIcon.getImage(),headIcon.getImage(),shirtIcon.getImage(),weaponIcon.getImage());
 				//Login.immigration.customization(look);
 				//Login.immigration.talk("YO!!");
 				dispose();

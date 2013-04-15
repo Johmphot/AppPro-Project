@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JCheckBox;
 
 public class Login extends JFrame 
 {
@@ -235,6 +236,7 @@ public class Login extends JFrame
 		{
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			user.setImage();
 			return true;
 		}
 		else return false;

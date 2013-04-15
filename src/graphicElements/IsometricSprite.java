@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import primary.Customize;
+import primary.Login;
 
 
 public class IsometricSprite implements Drawable
@@ -35,7 +36,6 @@ public class IsometricSprite implements Drawable
 
 	private boolean passable = true;
 	private boolean buildable = true;
-	private TileItem item = null;
 
 	private volatile ArrayList<IsometricSprite> linkedPoints;
 
@@ -71,6 +71,11 @@ public class IsometricSprite implements Drawable
 			g.setColor(Color.orange);
 			g.fillPolygon(poly);
 		}
+		else if (currentPos)
+		{
+			g.setColor(Color.GREEN);
+			g.fillPolygon(poly);
+		}
 		else 
 		{
 			g.drawPolygon(poly);
@@ -83,10 +88,7 @@ public class IsometricSprite implements Drawable
 	 */
 	private void drawItem(Graphics g) 
 	{
-		if (item != null) 
-		{
-			item.draw(g);
-		}
+		
 	}
 
 	/**
@@ -97,43 +99,10 @@ public class IsometricSprite implements Drawable
 	public void drawPoint(Graphics g)
 	{
 		rect = poly.getBounds();
-		g.setColor(Color.GREEN);
-		//Image imgB,imgH,imgS,imgW;
-		Image image;
-		if(focused == true) 
+		if(currentPos == true) 
 		{
-			/*IcetizenLook look = primary.Login.user.getIcetizenLook();
-			int body = Integer.parseInt(look.gidB.substring(1));
-			int head = Integer.parseInt(look.gidH.substring(1));
-			int shirt = Integer.parseInt(look.gidS.substring(1));
-			int weapon = Integer.parseInt(look.gidW.substring(1));
-			try
-			{
-				Customize.getGraphicsArray();
-				
-				imgB = Customize.getBody(body).getImage();
-				imgH = Customize.getHead(head).getImage();
-				imgS = Customize.getShirt(shirt).getImage();
-				imgW = Customize.getWeapon(weapon).getImage();
-				
-				g.drawImage(imgB, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
-				g.drawImage(imgH, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
-				g.drawImage(imgS, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
-				g.drawImage(imgW, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
-			}
-			catch(IOException e) 
-			{
-				System.out.println("Failed");
-			}*/
-			try 
-			{                
-				image = ImageIO.read(new File("src/blue.png"));
-				g.drawImage(image, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
-			} 
-			catch (IOException ex) 
-			{
-				System.out.println("Failed");
-			}
+			Image image = Login.user.getImage();
+			g.drawImage(image, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
 		}
 		
 	}
@@ -146,7 +115,6 @@ public class IsometricSprite implements Drawable
 
 		drawOutlines(g);
 		drawPoint(g);
-		//drawItem(g);
 
 		regeneratePoly();
 	}
@@ -252,11 +220,6 @@ public class IsometricSprite implements Drawable
 		return passable;
 	}
 
-	public void setTileItem(TileItem item) 
-	{
-		this.item = item;
-		item.setIsometricPoint(this);
-	}
 	public Point getImageLocation(int img_width, int img_height) 
 	{
 		Point tmp = getCenter();
@@ -294,10 +257,6 @@ public class IsometricSprite implements Drawable
 	{
 		return old_poly.intersects(r.x, r.y, r.width, r.height);
 	}
-	public void unsetTileItem() 
-	{
-		item = null;
-	}
 	public int getHeight() 
 	{
 		return height;
@@ -313,5 +272,9 @@ public class IsometricSprite implements Drawable
 	public void setWidth(int width)
 	{
 		this.width = width;
+	}
+	public void setCurrentPos(boolean current)
+	{
+		this.currentPos = current;
 	}
 }

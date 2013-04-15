@@ -73,7 +73,7 @@ public class GameCanvas extends Canvas implements Runnable
 					lastTile.setFocused(false);
 					lastTile = tile;
 					tile.setFocused(true);
-					//primary.Login.immigration.walk(x, y);
+					primary.Login.immigration.walk(x, y);
 				}
 			}
 		});
@@ -179,11 +179,6 @@ public class GameCanvas extends Canvas implements Runnable
 			iso = new IsometricMap();
 			iso.start();
 		}
-	}
-	
-	private void setCurrentPosition(IsometricSprite iso)
-	{
-		iso.setFocused(true);
 	}
 
 }

@@ -2,6 +2,7 @@ package primary;
 import iceworld.given.*;
 import java.awt.*;
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.io.IOException;
 
@@ -56,6 +57,14 @@ public class Main extends JFrame {
 		mnFile.add(mnOpen);
 
 		JMenuItem mntmNewWindows = new JMenuItem("New Windows");
+		mntmNewWindows.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Login newFrame = new Login();
+				newFrame.setVisible(true);
+			}
+		});
 		mnOpen.add(mntmNewWindows);
 
 		JSeparator separator_3 = new JSeparator();
@@ -112,7 +121,7 @@ public class Main extends JFrame {
 				System.exit(0);
 			}
 		});
-		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
 		mnFile.add(mntmExit);
 
 		JMenu mnAccount = new JMenu("Account");
@@ -226,7 +235,7 @@ public class Main extends JFrame {
 		lblZoom.setBounds(982, 6, 36, 16);
 		contentPane.add(lblZoom);
 
-		JSlider slider = new JSlider();
+		final JSlider slider = new JSlider();
 		slider.setValue(0);
 		slider.setMaximum(10);
 		slider.addChangeListener(new ChangeListener() 
@@ -300,6 +309,36 @@ public class Main extends JFrame {
 	        {
 				int speed = window.canvas.iso.zoomLevel+1;
 				window.canvas.iso.HEIGHT -= 5*speed;
+	        }
+		});
+		
+		arrow.put(KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS,InputEvent.CTRL_DOWN_MASK,false), "in");
+		arrow.put(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS,InputEvent.CTRL_DOWN_MASK,false), "out");
+		
+		action.put("in", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) 
+	        {
+				if(window.canvas.iso.zoomLevel<10)
+				{
+					window.canvas.iso.zoomLevel+=1;
+					slider.setValue(window.canvas.iso.zoomLevel);
+				}
+	        }
+		});
+		action.put("out", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) 
+	        {
+				if(window.canvas.iso.zoomLevel>0)
+				{
+					window.canvas.iso.zoomLevel-=1;
+					slider.setValue(window.canvas.iso.zoomLevel);
+				}
 	        }
 		});
 	}
