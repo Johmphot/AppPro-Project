@@ -1,14 +1,21 @@
 package graphicElements;
+import iceworld.given.IcetizenLook;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import primary.Customize;
 
 
 public class IsometricSprite implements Drawable
@@ -18,6 +25,7 @@ public class IsometricSprite implements Drawable
 
 	private boolean highlighted = false;
 	private boolean focused = false;
+	private boolean currentPos = false;
 
 	private Polygon poly = null;
 	private Rectangle rect;
@@ -43,6 +51,7 @@ public class IsometricSprite implements Drawable
 		poly = new Polygon(px, py, 4);
 		old_poly = new Polygon(px, py, 4);
 
+			
 	}
 
 	/**
@@ -88,8 +97,44 @@ public class IsometricSprite implements Drawable
 	public void drawPoint(Graphics g)
 	{
 		rect = poly.getBounds();
-		g.setColor(Color.black);
-		g.drawString("(" + x + "," + y + ")"+n, rect.x + width - 12, rect.y + height + 5);
+		g.setColor(Color.GREEN);
+		//Image imgB,imgH,imgS,imgW;
+		Image image;
+		if(focused == true) 
+		{
+			/*IcetizenLook look = primary.Login.user.getIcetizenLook();
+			int body = Integer.parseInt(look.gidB.substring(1));
+			int head = Integer.parseInt(look.gidH.substring(1));
+			int shirt = Integer.parseInt(look.gidS.substring(1));
+			int weapon = Integer.parseInt(look.gidW.substring(1));
+			try
+			{
+				Customize.getGraphicsArray();
+				
+				imgB = Customize.getBody(body).getImage();
+				imgH = Customize.getHead(head).getImage();
+				imgS = Customize.getShirt(shirt).getImage();
+				imgW = Customize.getWeapon(weapon).getImage();
+				
+				g.drawImage(imgB, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
+				g.drawImage(imgH, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
+				g.drawImage(imgS, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
+				g.drawImage(imgW, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
+			}
+			catch(IOException e) 
+			{
+				System.out.println("Failed");
+			}*/
+			try 
+			{                
+				image = ImageIO.read(new File("src/blue.png"));
+				g.drawImage(image, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
+			} 
+			catch (IOException ex) 
+			{
+				System.out.println("Failed");
+			}
+		}
 		
 	}
 
@@ -100,7 +145,7 @@ public class IsometricSprite implements Drawable
 			return;
 
 		drawOutlines(g);
-		//drawPoint(g);
+		drawPoint(g);
 		//drawItem(g);
 
 		regeneratePoly();
@@ -116,10 +161,8 @@ public class IsometricSprite implements Drawable
 		old_poly = new Polygon(poly.xpoints, poly.ypoints, poly.npoints);
 		// Regenerate poly
 
-		int[] px = { x * width + width, x * width, x * width - width,
-				x * width };
-		int[] py = { y * height, y * height + height, y * height,
-				y * height - height };
+		int[] px = { x * width + width, x * width, x * width - width, x * width };
+		int[] py = { y * height, y * height + height, y * height, y * height - height };
 
 		poly.xpoints = px;
 		poly.ypoints = py;

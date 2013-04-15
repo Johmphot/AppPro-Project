@@ -1,5 +1,5 @@
 package primary;
-import java.awt.*;
+ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -9,41 +9,48 @@ import java.net.URISyntaxException;
 import javax.imageio.*;
 import javax.swing.*;
 
-public class About extends JPanel{
+public class About extends JFrame{
 
 	ImagePanel aboutPanel;
 
 	public About(){
 		setImage();
+		setSize(980, 351);
 		setGUI();
 	}
 
 	private void setImage() {
-		aboutPanel = new ImagePanel("/aboutpage.png");
+		aboutPanel = new ImagePanel("src/aboutpage.png");
 	}
 
-	private void setGUI() {
+	private void setGUI() 
+	{
 		add(aboutPanel);
-		setVisible(true);
 	}
 
 
-	class ImagePanel extends JPanel{
+	class ImagePanel extends JPanel
+	{
 
 		private BufferedImage image;
 		String fileUrl;
 
-		public ImagePanel(String fileUrl) {
+		public ImagePanel(String fileUrl) 
+		{
 			this.fileUrl = fileUrl;
-			try {                
+			try 
+			{                
 				image = ImageIO.read(new File(fileUrl));
-			} catch (IOException ex) {
-
+			} 
+			catch (IOException ex) 
+			{
+				System.out.println("Failed");
 			}
 		}
 
 		@Override
-		protected void paintComponent(Graphics g) {
+		protected void paintComponent(Graphics g) 
+		{
 			super.paintComponent(g);
 			g.drawImage(image, 0, 0, null);            
 		}

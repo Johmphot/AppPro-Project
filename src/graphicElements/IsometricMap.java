@@ -26,9 +26,8 @@ public class IsometricMap implements Drawable
 	private boolean ready = false;
 	private long total, current;
 
-	public int zoomLevel = 0;
+	public static int zoomLevel = 0;
 	private final int TOTAL_ROWS = 100;
-	public IsometricSprite[][] map= new IsometricSprite[100][100];
 
 	public void start() 
 	{

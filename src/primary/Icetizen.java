@@ -10,10 +10,11 @@ import iceworld.given.MyIcetizen;
 
 public class Icetizen implements MyIcetizen
 {
+
+	IcetizenLook look;
 	public String uid, ip;
 	int port, portID, listeningPort, type, x, y;
 	public String username;
-
 
 	@Override
 	
@@ -25,7 +26,6 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public IcetizenLook getIcetizenLook()
 	{	
-		IcetizenLook look = new IcetizenLook();
 		return look;
 	}
 
@@ -64,9 +64,7 @@ public class Icetizen implements MyIcetizen
 	@Override
 	public void setIcetizenLook(IcetizenLook look) 
 	{
-		
-		
-		//Login.immigration.customization(look);
+		Login.immigration.customization(look);
 	}
 
 	@Override

@@ -122,11 +122,8 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JFrame about = new JFrame("About");
 				About ab = new About();
-				about.getContentPane().add(ab);
-				about.setSize(980, 351);
-				about.setVisible(true);
+				ab.setVisible(true);
 			}
 		});
 		mnFile.add(mntmAbout);
@@ -222,27 +219,16 @@ public class Login extends JFrame
 	public boolean userLogin(String username,String password)
 	{
 		user = new Icetizen();
-
-		
-
 		immigration = new ICEWorldImmigration((MyIcetizen) user);
-		
-		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-
-		immigration = new ICEWorldImmigration(user); 
-
-
-		immigration = new ICEWorldImmigration((MyIcetizen) user);
-
 		user.setIcePortID(253); //Port ID 253
 		user.setUsername(username);
 		user.setListeningPort(10018);
-		IcetizenLook look = user.getIcetizenLook();
-		if(look.gidB==null){
-		look.gidB = "B001";
-		look.gidH = "H001";
-		look.gidS = "S001";
-		look.gidW = "W001";
+		user.look = new IcetizenLook();
+		if(user.look.gidB==null){
+		user.look.gidB = "B001";
+		user.look.gidH = "H001";
+		user.look.gidS = "S001";
+		user.look.gidW = "W001";
 		}
 	
 		if(immigration.login(password))
@@ -258,12 +244,6 @@ public class Login extends JFrame
 	{
 		user = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) user); 
-
-
-		
-		immigration = new ICEWorldImmigration(user); 
-
-
 		user.setIcePortID(253); //Port ID 253
 		user.setListeningPort(10018);
 		IcetizenLook look = new IcetizenLook();

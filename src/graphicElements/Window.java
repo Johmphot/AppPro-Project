@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class Window extends JPanel
 {
 
-	public GameCanvas canvas = null;
+	public static GameCanvas canvas = null;
 
 	public Window() 
 	{
