@@ -1,5 +1,6 @@
 package primary;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -21,6 +22,7 @@ public class Icetizen implements MyIcetizen
 	public String uid, ip;
 	int port, portID, listeningPort, type, x, y;
 	public String username;
+	public Point p= new Point();
 	static JSONParser json = new JSONParser();
 	 static ContainerFactory containerFactory = new ContainerFactory() {
 		    public List creatArrayContainer() { return new LinkedList(); } 
@@ -75,7 +77,7 @@ public class Icetizen implements MyIcetizen
 		lookk.gidW = ((String) jsonData.get(0).get("W")==null) ? "S019": (String) jsonData.get(0).get("W");
 		lookk.gidS = ((String) jsonData.get(0).get("S")==null) ? "W050": (String) jsonData.get(0).get("S");
 		this.setIcetizenLook(lookk);
-		System.out.print(username+look.gidB);
+		System.out.println(username +look.gidB+" "+look.gidH+" "+look.gidS+ " "+look.gidW);
 	}
 	
 	@Override
@@ -93,6 +95,10 @@ public class Icetizen implements MyIcetizen
 	public String getUID(){
 		return uid;
 	}
+	
+	public Point getPoint(){
+		return p;
+	}
 
 	@Override
 	public void setIcePortID(int id) 
@@ -105,6 +111,7 @@ public class Icetizen implements MyIcetizen
 	public void setIcetizenLook(IcetizenLook look) 
 	{
 		this.look=look;
+		Login.immigration.customization(look);
 	}
 
 	@Override
@@ -112,7 +119,7 @@ public class Icetizen implements MyIcetizen
 	{
 		listeningPort = arg0;
 	}
-
+	
 	@Override
 	public void setUsername(String username) 
 	{
@@ -123,6 +130,12 @@ public class Icetizen implements MyIcetizen
 		this.uid=uid;
 	}
 	
+	public void setPoint(int x, int y){
+		this.p.x= x;
+		this.p.y= y;
+		this.x=x;
+		this.y=y;
+	}
 	
 	
 }
