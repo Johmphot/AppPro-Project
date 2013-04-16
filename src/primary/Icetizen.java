@@ -1,5 +1,7 @@
 package primary;
 
+
+import java.awt.Point;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -29,6 +31,7 @@ public class Icetizen implements MyIcetizen
 	public String uid, ip;
 	int port, portID, listeningPort, type, x, y;
 	public String username;
+	public Point p= new Point();
 	BufferedImage img;
 	static JSONParser json = new JSONParser();
 	 static ContainerFactory containerFactory = new ContainerFactory() {
@@ -83,7 +86,7 @@ public class Icetizen implements MyIcetizen
 		lookk.gidW = ((String) jsonData.get(0).get("W")==null) ? "S019": (String) jsonData.get(0).get("W");
 		lookk.gidS = ((String) jsonData.get(0).get("S")==null) ? "W050": (String) jsonData.get(0).get("S");
 		this.setIcetizenLook(lookk);
-		System.out.print(username+look.gidB);
+		System.out.println(username +look.gidB+" "+look.gidH+" "+look.gidS+ " "+look.gidW);
 	}
 	
 	@Override
@@ -101,6 +104,10 @@ public class Icetizen implements MyIcetizen
 	public String getUID(){
 		return uid;
 	}
+	
+	public Point getPoint(){
+		return p;
+	}
 
 	@Override
 	public void setIcePortID(int id) 
@@ -113,6 +120,7 @@ public class Icetizen implements MyIcetizen
 	public void setIcetizenLook(IcetizenLook look) 
 	{
 		this.look=look;
+		Login.immigration.customization(look);
 	}
 
 	@Override
@@ -120,7 +128,7 @@ public class Icetizen implements MyIcetizen
 	{
 		listeningPort = arg0;
 	}
-
+	
 	@Override
 	public void setUsername(String username) 
 	{
@@ -131,12 +139,20 @@ public class Icetizen implements MyIcetizen
 		this.uid=uid;
 	}
 	
+	public void setPoint(int x, int y){
+		this.p.x= x;
+		this.p.y= y;
+		this.x=x;
+		this.y=y;
+	}
+	
 	public void setImage()
 	{
 		img = new BufferedImage(400,500, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = img.createGraphics();
 		Image imgB, imgH, imgS, imgW;
 		IcetizenLook look = primary.Login.myUser.getIcetizenLook();
+		
 		imgB = getComponentImage(look.gidB);
 		imgH = getComponentImage(look.gidH);
 		imgS = getComponentImage(look.gidS);
@@ -146,6 +162,25 @@ public class Icetizen implements MyIcetizen
 		g.drawImage(imgH, 0, 0, null);
 		g.drawImage(imgS, 0, 0, null);
 		g.drawImage(imgW, 0, 0, null);
+		
+		int body = Integer.parseInt(look.gidB.substring(1));
+		int head = Integer.parseInt(look.gidH.substring(1));
+		int shirt = Integer.parseInt(look.gidS.substring(1));
+		int weapon = Integer.parseInt(look.gidW.substring(1));
+		try
+		{
+			Customize.getGraphicsArray();
+			imgB = Customize.getBody(body).getImage();
+			imgH = Customize.getHead(head).getImage();
+			imgS = Customize.getShirt(shirt).getImage();
+			imgW = Customize.getWeapon(weapon).getImage();
+	
+			g.drawImage(imgB, 0, 0, null);
+			g.drawImage(imgH, 0, 0, null);
+			g.drawImage(imgS, 0, 0, null);
+			g.drawImage(imgW, 0, 0, null);
+		}
+		catch(IOException e){}
 	}
 	public void setImage(Image imgB,Image imgH,Image imgS,Image imgW)
 	{

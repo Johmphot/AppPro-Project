@@ -201,6 +201,12 @@ public class Login extends JFrame
 				String password = new String(passwordField.getPassword());
 				if (userLogin(name,password))
 				{
+					LinkedList<Icetizen> user = new LinkedList<Icetizen>();
+					Fetch a = new Fetch(user);
+					a.start();
+					try {
+						myUser.fetchLook();
+					} catch (ParseException e1) {}
 					Main world = new Main(name);
 					dispose();
 					world.setVisible(true);
@@ -250,6 +256,7 @@ public class Login extends JFrame
 		myUser.setListeningPort(10018);
 		if(immigration.login(password))
 		{
+
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
 			LinkedList<Icetizen> user = new LinkedList<Icetizen>();
@@ -277,6 +284,7 @@ public class Login extends JFrame
 		look.gidH = "H001";
 		look.gidS = "S001";
 		look.gidW = "W001";
+		myUser.setIcetizenLook(look);
 		if(immigration.loginAlien())
 		{
 			JFrame frame = new JFrame();
