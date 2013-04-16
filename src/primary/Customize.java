@@ -25,7 +25,7 @@ import javax.swing.event.*;
 
 public class Customize extends JFrame{
 	static IcetizenLook looks= Login.myUser.getIcetizenLook();
-	static String[] body,head, shirt, weapon;
+	static String[] body, head, shirt, weapon;
 	JPanel draw;
 	static JSONParser json = new JSONParser();
 	static ContainerFactory containerFactory = new ContainerFactory() {
@@ -198,7 +198,7 @@ public class Customize extends JFrame{
 	public static ImageIcon getShirt(int i) throws IOException{
 		URL url = null;
 		String sreq="http://iceworld.sls-atl.com/api/&cmd=gurl&gid="+shirt[i];
-		String bla, linkToImage ="";;
+		String bla, linkToImage ="";
 		ImageIcon shirtimg;
 		url= new URL (sreq);
 		//{"status":1,"data":{"gid":"B001","location":"graphics\/body\/blue.png"}}
@@ -274,7 +274,7 @@ public class Customize extends JFrame{
 		//draw.setSize(200,300);
 		draw.setLayout(null);
 		
-		this.getGraphicsArray();
+		Customize.getGraphicsArray();
 		getLook();
 		
 		
@@ -492,10 +492,10 @@ public class Customize extends JFrame{
 				looks.gidS = shirt[shirtIndex];
 				looks.gidW = weapon[weaponIndex];
 
-				Login.immigration.customization(look);
-				Login.user.setIcetizenLook(look);
+				Login.immigration.customization(looks);
+				Login.myUser.setIcetizenLook(looks);
 				//lookChange = true;
-				Login.user.setImage(bodyIcon.getImage(),headIcon.getImage(),shirtIcon.getImage(),weaponIcon.getImage());
+				Login.myUser.setImage(bodyIcon.getImage(),headIcon.getImage(),shirtIcon.getImage(),weaponIcon.getImage());
 				//Login.immigration.customization(look);
 				//Login.immigration.talk("YO!!");
 				dispose();
