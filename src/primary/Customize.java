@@ -100,6 +100,8 @@ public class Customize extends JFrame{
 				w++;
 		}
 		
+		System.out.println("w="+w);
+		
 		body=new String[b];
 		head=new String[h];
 		shirt=new String[s];
@@ -492,10 +494,10 @@ public class Customize extends JFrame{
 				looks.gidS = shirt[shirtIndex];
 				looks.gidW = weapon[weaponIndex];
 
-				Login.immigration.customization(look);
-				Login.user.setIcetizenLook(look);
+				Login.immigration.customization(looks);
+				Login.myUser.setIcetizenLook(looks);
 				//lookChange = true;
-				Login.user.setImage(bodyIcon.getImage(),headIcon.getImage(),shirtIcon.getImage(),weaponIcon.getImage());
+				Login.myUser.setImage(bodyIcon.getImage(),headIcon.getImage(),shirtIcon.getImage(),weaponIcon.getImage());
 				//Login.immigration.customization(look);
 				//Login.immigration.talk("YO!!");
 				dispose();

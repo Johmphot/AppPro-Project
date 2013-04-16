@@ -48,15 +48,20 @@ public class Main extends JFrame {
 		setBounds(100, 100, 1024, 768);
 
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(Color.LIGHT_GRAY);
 		setJMenuBar(menuBar);
 
 		JMenu mnFile = new JMenu("File");
+		mnFile.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		mnFile.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(mnFile);
 
 		JMenu mnOpen = new JMenu("Open");
+		mnOpen.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mnFile.add(mnOpen);
 
 		JMenuItem mntmNewWindows = new JMenuItem("New Windows");
+		mntmNewWindows.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmNewWindows.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -71,6 +76,7 @@ public class Main extends JFrame {
 		mnOpen.add(separator_3);
 
 		JMenuItem mntmIceWorldPeek = new JMenuItem("ICE World Peek");
+		mntmIceWorldPeek.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmIceWorldPeek.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -85,6 +91,7 @@ public class Main extends JFrame {
 		mnOpen.add(mntmIceWorldPeek);
 
 		JMenuItem mntmPreferences = new JMenuItem("Preferences...");
+		mntmPreferences.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmPreferences.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -100,6 +107,7 @@ public class Main extends JFrame {
 		mnFile.add(separator_1);
 
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmAbout.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -114,6 +122,7 @@ public class Main extends JFrame {
 		mnFile.add(separator);
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -125,9 +134,12 @@ public class Main extends JFrame {
 		mnFile.add(mntmExit);
 
 		JMenu mnAccount = new JMenu("Account");
+		mnAccount.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		mnAccount.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(mnAccount);
 
 		JMenuItem mntmCustomization = new JMenuItem("Customization...");
+		mntmCustomization.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmCustomization.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -151,6 +163,7 @@ public class Main extends JFrame {
 		mnAccount.add(separator_2);
 
 		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mntmLogout.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmLogout.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -166,76 +179,118 @@ public class Main extends JFrame {
 		mnAccount.add(mntmLogout);
 
 		JMenu mnHelp = new JMenu("Help");
+		mnHelp.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		mnHelp.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
+		mntmHelpContents.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnHelp.add(mntmHelpContents);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		typeBox = new JTextField();
-		typeBox.setBounds(15, 668, 230, 28);
-		contentPane.add(typeBox);
-		typeBox.setColumns(10);
-
 		final graphicElements.Window window = new graphicElements.Window();
-		window.setBounds(6, 6, 964, 512);
+		window.canvas.setBounds(0, 0, 964, 560);
+		window.setAlignmentX(Component.LEFT_ALIGNMENT);
+		window.setAlignmentY(0.0f);
+		window.setMinimumSize(new Dimension(964, 560));
+		window.setPreferredSize(new Dimension(964, 560));
+		window.setBounds(6, 6, 964, 560);
 		contentPane.add(window);
+		window.setLayout(null);
 
 		JPanel controlPanel = new JPanel();
+		controlPanel.setBackground(Color.DARK_GRAY);
 		controlPanel.setBorder(null);
-		controlPanel.setBounds(277, 525, 741, 193);
+		controlPanel.setBounds(6, 570, 1002, 148);
 		contentPane.add(controlPanel);
 		controlPanel.setLayout(null);
-		
-		final JTextArea chatBox = new JTextArea();
-		chatBox.setEditable(false);
-		chatBox.setBounds(15, 530, 230, 122);
-		contentPane.add(chatBox);
 
+		final JTextArea chatBox = new JTextArea();
+		chatBox.setBounds(6, 7, 323, 135);
+		controlPanel.add(chatBox);
+		chatBox.setBackground(Color.LIGHT_GRAY);
+		chatBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		chatBox.setEditable(false);
+		
+				typeBox = new JTextField();
+				typeBox.setBounds(395, 21, 323, 55);
+				controlPanel.add(typeBox);
+				typeBox.setBackground(Color.LIGHT_GRAY);
+				typeBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+				typeBox.setColumns(10);
+		
 		JButton btnTalk = new JButton("Talk");
-		btnTalk.setBounds(29, 141, 60, 20);
+		btnTalk.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		btnTalk.setBounds(395, 88, 161, 29);
 		controlPanel.add(btnTalk);
 		btnTalk.addActionListener(new ActionListener()
 		{
 		     public void actionPerformed(ActionEvent ae)
 		     {
-		    	 chatDialogue+= typeBox.getText()+"\n";
-		          chatBox.setText(chatDialogue);
+		    	 String text = typeBox.getText();
+		    	 if (text.length()<=100) 
+		    	 {
+					Login.immigration.talk(text);
+					chatDialogue += text + "\n";
+					chatBox.setText(chatDialogue);
+		    	 }
+		    	 else
+		    	 {
+		    		JFrame warn = new JFrame();
+		    		JOptionPane.showMessageDialog(warn, "Message is longer than 100 characters ", "Talk Error", JOptionPane.ERROR_MESSAGE);
+		    	 }
 		     }
 		});
 
 		JButton btnYell = new JButton("Yell");
-		btnYell.setBounds(101, 141, 60, 20);
+		btnYell.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		btnYell.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				String text = typeBox.getText().toUpperCase();
+		    	 if (text.length()<=10) 
+		    	 {
+					Login.immigration.yell(text);
+					chatDialogue += text + "\n";
+					chatBox.setText(chatDialogue);
+		    	 }
+		    	 else
+		    	 {
+		    		JFrame warn = new JFrame();
+		    		JOptionPane.showMessageDialog(warn, "Message is longer than 10 characters ", "Yell Error", JOptionPane.ERROR_MESSAGE);
+		    	 }
+			}
+		});
+		btnYell.setBounds(557, 88, 161, 29);
 		controlPanel.add(btnYell);
 
-		JButton btnSpecialAction = new JButton("Special Action");
-		btnSpecialAction.setBounds(29, 35, 132, 52);
-		controlPanel.add(btnSpecialAction);
-
-		JPanel miniMap = new JPanel();
-		miniMap.setBackground(Color.WHITE);
-		miniMap.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
-		miniMap.setBounds(414, 6, 298, 176);
-		controlPanel.add(miniMap);
-
 		JLabel lblWeather = new JLabel("Weather");
-		lblWeather.setBounds(258, 22, 61, 16);
+		lblWeather.setFont(new Font("Helvetica Neue", Font.PLAIN, 15));
+		lblWeather.setForeground(Color.WHITE);
+		lblWeather.setBounds(864, 6, 61, 16);
 		controlPanel.add(lblWeather);
 
-		JPanel weatherPanel = new JPanel();
-		weatherPanel.setBackground(Color.WHITE);
-		weatherPanel.setBounds(229, 50, 121, 98);
-		controlPanel.add(weatherPanel);
+		Weather wth = new Weather();
+		//weatherPanel.setBackground(Color.WHITE);
+		wth.setBounds(834, 34, 121, 98);
+		Thread weatherThread = new Thread(wth);
+		weatherThread.start();
+		controlPanel.add(wth);
 
 		JLabel lblZoom = new JLabel("Zoom");
+		lblZoom.setForeground(Color.WHITE);
+		lblZoom.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		lblZoom.setBounds(982, 6, 36, 16);
 		contentPane.add(lblZoom);
 
 		final JSlider slider = new JSlider();
+		slider.setBackground(Color.LIGHT_GRAY);
 		slider.setValue(0);
 		slider.setMaximum(10);
 		slider.addChangeListener(new ChangeListener() 
@@ -256,7 +311,7 @@ public class Main extends JFrame {
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
 		slider.setOrientation(SwingConstants.VERTICAL);
-		slider.setBounds(982, 28, 36, 490);
+		slider.setBounds(982, 28, 36, 530);
 		contentPane.add(slider);
 		
 		

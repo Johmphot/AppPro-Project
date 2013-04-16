@@ -99,10 +99,11 @@ public class IsometricSprite implements Drawable
 	public void drawPoint(Graphics g)
 	{
 		rect = poly.getBounds();
-		if(currentPos == true) 
+		if(currentPos) 
 		{
-			Image image = Login.user.getImage();
+			Image image = Login.myUser.getImage();
 			g.drawImage(image, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
+			this.setBuildable(false);
 		}
 		
 	}
