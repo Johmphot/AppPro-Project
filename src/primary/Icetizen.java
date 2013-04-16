@@ -1,7 +1,12 @@
 package primary;
 
+
 import java.awt.Point;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -18,18 +23,18 @@ import iceworld.given.MyIcetizen;
 public class Icetizen implements MyIcetizen
 {
 
-	IcetizenLook look;
+	public static IcetizenLook look;
 	public String uid, ip;
 	int port, portID, listeningPort, type, x, y;
 	public String username;
 	public Point p= new Point();
+	BufferedImage img;
 	static JSONParser json = new JSONParser();
 	 static ContainerFactory containerFactory = new ContainerFactory() {
 		    public List creatArrayContainer() { return new LinkedList(); } 
 		    public Map createObjectContainer() { return new LinkedHashMap(); }
 
 	 };
-
 
 	@Override
 	
@@ -136,6 +141,48 @@ public class Icetizen implements MyIcetizen
 		this.x=x;
 		this.y=y;
 	}
+	
+	public void setImage()
+	{
+		img = new BufferedImage(400,500, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = img.createGraphics();
+		Image imgB, imgH, imgS, imgW;
+		IcetizenLook look = primary.Login.myUser.getIcetizenLook();
+		int body = Integer.parseInt(look.gidB.substring(1));
+		int head = Integer.parseInt(look.gidH.substring(1));
+		int shirt = Integer.parseInt(look.gidS.substring(1));
+		int weapon = Integer.parseInt(look.gidW.substring(1));
+		try
+		{
+			Customize.getGraphicsArray();
+			imgB = Customize.getBody(body).getImage();
+			imgH = Customize.getHead(head).getImage();
+			imgS = Customize.getShirt(shirt).getImage();
+			imgW = Customize.getWeapon(weapon).getImage();
+	
+			g.drawImage(imgB, 0, 0, null);
+			g.drawImage(imgH, 0, 0, null);
+			g.drawImage(imgS, 0, 0, null);
+			g.drawImage(imgW, 0, 0, null);
+		}
+		catch(IOException e){}
+	}
+	public void setImage(Image imgB,Image imgH,Image imgS,Image imgW)
+	{
+		img = new BufferedImage(400,500, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = img.createGraphics();
+		g.drawImage(imgB, 0, 0, null);
+		g.drawImage(imgH, 0, 0, null);
+		g.drawImage(imgS, 0, 0, null);
+		g.drawImage(imgW, 0, 0, null);
+		
+	}
+	
+	public Image getImage()
+	{
+		return img;
+	}
+	
 	
 	
 }

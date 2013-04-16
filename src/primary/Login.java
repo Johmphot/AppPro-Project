@@ -229,8 +229,6 @@ public class Login extends JFrame
 
 	public boolean userLogin(String username,String password)
 	{
-		JFrame frame = new JFrame();
-		JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
 		myUser = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) myUser);
 		myUser.setIcePortID(253); //Port ID 253
@@ -238,6 +236,18 @@ public class Login extends JFrame
 		myUser.setListeningPort(10018);
 		if(immigration.login(password))
 		{
+
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			LinkedList<Icetizen> user = new LinkedList<Icetizen>();
+			Fetch a = new Fetch(user);
+			a.start();
+			try 
+			{
+				myUser.fetchLook();
+			} 
+			catch (ParseException e) {}
+			myUser.setImage();
 			return true;
 		}
 		else return false;

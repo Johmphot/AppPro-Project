@@ -16,7 +16,7 @@ public class Translator
 		return result;
 	}
 	
-	public Point toIso(Point p)
+	public static Point toIso(Point p)
 	{
 		int oy = p.y + p.x;
 		int ox = p.x + (99 - p.y);
