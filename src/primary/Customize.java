@@ -100,6 +100,8 @@ public class Customize extends JFrame{
 				w++;
 		}
 		
+		System.out.println("w="+w);
+		
 		body=new String[b];
 		head=new String[h];
 		shirt=new String[s];

@@ -72,15 +72,20 @@ public class Login extends JFrame
 		setBounds(100, 100, 800, 600);
 
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(Color.LIGHT_GRAY);
 		setJMenuBar(menuBar);
 
 		JMenu mnFile = new JMenu("File");
+		mnFile.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+		mnFile.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(mnFile);
 
 		JMenu mnOpen = new JMenu("Open");
+		mnOpen.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mnFile.add(mnOpen);
 
 		JMenuItem mntmNewLoginWindow = new JMenuItem("New Login Window");
+		mntmNewLoginWindow.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmNewLoginWindow.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -95,6 +100,7 @@ public class Login extends JFrame
 		mnOpen.add(separator_2);
 
 		JMenuItem mntmIceWorldPeek = new JMenuItem("ICE World Peek");
+		mntmIceWorldPeek.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmIceWorldPeek.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -109,6 +115,7 @@ public class Login extends JFrame
 		mnOpen.add(mntmIceWorldPeek);
 
 		JMenuItem mntmPreferences = new JMenuItem("Preferences...");
+		mntmPreferences.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmPreferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -122,6 +129,7 @@ public class Login extends JFrame
 		mnFile.add(separator);
 
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmAbout.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -136,6 +144,7 @@ public class Login extends JFrame
 		mnFile.add(separator_1);
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmExit.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -147,18 +156,22 @@ public class Login extends JFrame
 		mnFile.add(mntmExit);
 
 		JMenu mnHelp = new JMenu("Help");
+		mnHelp.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+		mnHelp.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
+		mntmHelpContents.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnHelp.add(mntmHelpContents);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		final JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		formattedTextField.setBounds(320, 176, 261, 28);
 		contentPane.add(formattedTextField);
 
@@ -167,14 +180,19 @@ public class Login extends JFrame
 		contentPane.add(passwordField);
 
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(230, 182, 67, 16);
+		lblUsername.setForeground(Color.WHITE);
+		lblUsername.setFont(new Font("Helvetica Neue", Font.BOLD, 15));
+		lblUsername.setBounds(230, 182, 78, 16);
 		contentPane.add(lblUsername);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(230, 254, 65, 16);
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Helvetica Neue", Font.BOLD, 15));
+		lblPassword.setBounds(230, 254, 78, 16);
 		contentPane.add(lblPassword);
 
 		JButton btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		btnLogin.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -197,7 +215,7 @@ public class Login extends JFrame
 				else
 				{
 					JFrame frame = new JFrame();
-					JOptionPane.showMessageDialog(frame, "Incorrect Username//Password", "Login Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Incorrect Username/Password", "Login Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -205,6 +223,7 @@ public class Login extends JFrame
 		contentPane.add(btnLogin);
 
 		JButton btnAlien = new JButton("Login As Alien");
+		btnAlien.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		btnAlien.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -221,8 +240,9 @@ public class Login extends JFrame
 		contentPane.add(btnAlien);
 
 		JLabel lblIceWorld = new JLabel("ICE World");
+		lblIceWorld.setForeground(Color.WHITE);
 		lblIceWorld.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIceWorld.setFont(new Font("Lucida Grande", Font.PLAIN, 50));
+		lblIceWorld.setFont(new Font("Helvetica Neue", Font.BOLD, 50));
 		lblIceWorld.setBounds(244, 71, 337, 51);
 		contentPane.add(lblIceWorld);
 	}

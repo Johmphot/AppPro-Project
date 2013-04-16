@@ -8,9 +8,13 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
@@ -148,6 +152,17 @@ public class Icetizen implements MyIcetizen
 		Graphics2D g = img.createGraphics();
 		Image imgB, imgH, imgS, imgW;
 		IcetizenLook look = primary.Login.myUser.getIcetizenLook();
+		
+		imgB = getComponentImage(look.gidB);
+		imgH = getComponentImage(look.gidH);
+		imgS = getComponentImage(look.gidS);
+		imgW = getComponentImage(look.gidW);
+		
+		g.drawImage(imgB, 0, 0, null);
+		g.drawImage(imgH, 0, 0, null);
+		g.drawImage(imgS, 0, 0, null);
+		g.drawImage(imgW, 0, 0, null);
+		
 		int body = Integer.parseInt(look.gidB.substring(1));
 		int head = Integer.parseInt(look.gidH.substring(1));
 		int shirt = Integer.parseInt(look.gidS.substring(1));
@@ -180,6 +195,49 @@ public class Icetizen implements MyIcetizen
 	
 	public Image getImage()
 	{
+		return img;
+	}
+	
+	public Image getComponentImage(String id)
+	{
+		URL url = null;
+		String sreq="http://iceworld.sls-atl.com/api/&cmd=gurl&gid="+id;
+		String bla, linkToImage ="";;
+		Image img = null;
+		try 
+		{
+			url= new URL (sreq);
+		} 
+		catch (MalformedURLException e1) {}
+		//{"status":1,"data":{"gid":"B001","location":"graphics\/body\/blue.png"}}
+		URLConnection connection = null;
+		BufferedReader temp;
+		try 
+		{
+			connection = url.openConnection();
+			connection.connect();
+			temp = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			while ((bla = temp.readLine()) != null) 
+			{
+				
+				Map jsonMap = (Map) json.parse(bla, containerFactory);
+				Map jsonData = (Map)jsonMap.get("data");
+					
+				linkToImage = (String) jsonData.get("location");
+					
+			}
+		} 
+		catch (IOException e1){}
+		catch (org.json.simple.parser.ParseException e1) {}	
+		URL slink;
+		try 
+		{
+			slink = new URL("http://iceworld.sls-atl.com/"+linkToImage);
+			img = ImageIO.read(slink);
+		}
+		catch (MalformedURLException e) {}
+		catch (IOException e) {}
+	
 		return img;
 	}
 	

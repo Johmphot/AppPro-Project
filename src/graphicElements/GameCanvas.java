@@ -19,7 +19,7 @@ public class GameCanvas extends Canvas implements Runnable
 	private final long FRAME_DELAY = 16; // 62.5fps
 	private final int MIN_SLEEP_TIME = 2;
 
-	private final int HEIGHT = 512;
+	private final int HEIGHT = 560;
 	private final int WIDTH = 964;
 
 	public IsometricMap iso = null;
@@ -69,10 +69,11 @@ public class GameCanvas extends Canvas implements Runnable
 					IsometricSprite tile = iso.getPoint(getMousePosition().getLocation());
 					int x = Translator.toGrid(tile).x;
 					int y = Translator.toGrid(tile).y;
-					System.out.println(x+","+y);
 					lastTile.setFocused(false);
 					lastTile = tile;
 					tile.setFocused(true);
+					//animateWalk(x,y);
+					System.out.println("Walk to "+x+","+y);
 					primary.Login.immigration.walk(x, y);
 				}
 			}
@@ -178,6 +179,31 @@ public class GameCanvas extends Canvas implements Runnable
 		{
 			iso = new IsometricMap();
 			iso.start();
+		}
+	}
+	
+	public void animateWalk(int nx,int ny)
+	{
+		int ox,oy; // get old position from Iceworld
+		IsometricSprite ip,previous;
+		int x=ox, y=oy;
+		while(ox!=nx)
+		{
+			previous = iso.getPoint(Translator.toIso(new Point(x-1,y)));
+			previous.setCurrentPos(false);
+			ip = iso.getPoint(Translator.toIso(new Point(x,y)));
+			ip.setCurrentPos(true);
+			if(x>nx) x--;
+			if(x<nx) x++;
+		}
+		while(oy!=ny)
+		{
+			previous = iso.getPoint(Translator.toIso(new Point(x,y-1)));
+			previous.setCurrentPos(false);
+			ip = iso.getPoint(Translator.toIso(new Point(x,y)));
+			ip.setCurrentPos(true);
+			if(y>ny) y--;
+			if(y<ny) y++;
 		}
 	}
 

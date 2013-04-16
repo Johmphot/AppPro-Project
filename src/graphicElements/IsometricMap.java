@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class IsometricMap implements Drawable 
 {
 
-	public int HEIGHT = 512;
+	public int HEIGHT = 560;
 	public int WIDTH = 964;
 
 	private int MAX_TILES_X = 100;
@@ -228,6 +228,18 @@ public class IsometricMap implements Drawable
 				{
 					return ip;
 				}
+			}
+		}
+		return null;
+	}
+	public IsometricSprite getCurrentSprite()
+	{
+		for(int x=0;x<100;x++)
+		{
+			for(int y=0;y<100;y++)
+			{
+				IsometricSprite ip = this.getPoint(new Point(x,y));
+				if(ip.isBuildable() == false) return ip;
 			}
 		}
 		return null;
