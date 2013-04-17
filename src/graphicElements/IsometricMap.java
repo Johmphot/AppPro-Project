@@ -215,7 +215,6 @@ public class IsometricMap implements Drawable
 	{
 		return current;
 	}
-
 	public IsometricSprite getPoint(Point p) 
 	{
 
@@ -228,18 +227,6 @@ public class IsometricMap implements Drawable
 				{
 					return ip;
 				}
-			}
-		}
-		return null;
-	}
-	public IsometricSprite getCurrentSprite()
-	{
-		for(int x=0;x<100;x++)
-		{
-			for(int y=0;y<100;y++)
-			{
-				IsometricSprite ip = this.getPoint(new Point(x,y));
-				if(ip.isBuildable() == false) return ip;
 			}
 		}
 		return null;

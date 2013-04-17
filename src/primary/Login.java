@@ -13,7 +13,12 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
@@ -27,8 +32,14 @@ import org.json.simple.parser.ParseException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Login extends JFrame 
 {
@@ -41,6 +52,7 @@ public class Login extends JFrame
 	int listeningPort = 12345;
 	public static BGMusic music = new BGMusic();
 	public static SEMusic effect = new SEMusic();
+	JScrollPane userScrollPane;
 
 	/**
 	 * Launch the application.
@@ -195,6 +207,11 @@ public class Login extends JFrame
 		final JFormattedTextField formattedTextField = new JFormattedTextField();
 		formattedTextField.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		formattedTextField.setBounds(320, 176, 261, 28);
+		formattedTextField.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				userScrollPane.setVisible(true);
+			}
+		});
 		contentPane.add(formattedTextField);
 
 		passwordField = new JPasswordField();
@@ -219,22 +236,64 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				effect.play();
 				String name = formattedTextField.getText();
 				String password = new String(passwordField.getPassword());
 				if (userLogin(name,password))
 				{
+					
 					Main world = new Main(name);
 					dispose();
 					world.setVisible(true);	
 				}
 				else
 				{
+					Scanner scanner;
+					try {
+						scanner = new Scanner(new File("History.txt"));
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					JFrame frame = new JFrame();
 					JOptionPane.showMessageDialog(frame, "Incorrect Username/Password", "Login Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
+		
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(new File("History.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		int count=0;
+		while (scanner.hasNextLine()) {
+			count++;
+
+			String line = scanner.nextLine();
+			System.out.println(line);
+
+		}
+		String []user = new String[count];
+		Scanner scanner1 = null;
+		try {
+			scanner1 = new Scanner(new File("History.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		while (scanner1.hasNextLine()) {
+			for(int i = 0; i<user.length; i++){
+				user[i]= scanner1.nextLine();
+				System.out.print("scanner"+user[i]);
+			}
+
+			//String line = scanner.nextLine();
+			//System.out.println(line);
+
+		}
 		btnLogin.setBounds(349, 322, 117, 29);
 		contentPane.add(btnLogin);
 
@@ -262,7 +321,40 @@ public class Login extends JFrame
 		lblIceWorld.setFont(new Font("Helvetica Neue", Font.BOLD, 50));
 		lblIceWorld.setBounds(244, 71, 337, 51);
 		contentPane.add(lblIceWorld);
+		
+		final JList list = new JList(user);
+		userScrollPane=new JScrollPane(list);
+		userScrollPane.setBounds(577, 178, 96, 62);
+		contentPane.add(userScrollPane);
+		//add(scrollPane);
+		userScrollPane.setVisible(false);
+		list.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+
+
+					String selectedItem = (String) list.getSelectedValue();
+					formattedTextField.setText(selectedItem);
+					userScrollPane.setVisible(false);}
+			}
+		});
 	}
+	
+	public static boolean checking(String s) throws FileNotFoundException{
+		boolean c =true;
+		Scanner scanner1 = new Scanner(new File("History.txt"));
+		while (scanner1.hasNextLine()) {
+
+			if (s.equals (scanner1.nextLine())){
+				c=false;
+			}
+
+
+		}
+		return c;
+	}
+	
+	
 
 	public boolean userLogin(String username,String password)
 	{
@@ -274,7 +366,27 @@ public class Login extends JFrame
 		myUser.setListeningPort(listeningPort);
 		if(immigration.login(password))
 		{
+			File log = new File("History.txt");
 
+			try{
+				if(!log.exists()){
+					System.out.println("We had to make a new file.");
+					log.createNewFile();
+				}
+
+				FileWriter fileWriter = new FileWriter(log, true);
+
+				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+				if(checking(username)){
+					bufferedWriter.newLine();
+					bufferedWriter.write(username);
+					bufferedWriter.close();}
+
+				System.out.println("Remember this user");
+			} catch(IOException e1) {
+				System.out.println("COULD NOT LOG!!");
+			}
+			
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
 			listeningPort++;

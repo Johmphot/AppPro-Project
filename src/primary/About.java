@@ -1,3 +1,5 @@
+package primary;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -20,7 +22,7 @@ setVisible(true);
 private void setImage() {
 	BufferedImage myPicture = null;
 	try {
-		myPicture = ImageIO.read(new File("C:/Users/aftrBrkfst/workspace/App Pro project/src/aboutpage.png"));
+		myPicture = ImageIO.read(new File("src/aboutpage.png"));
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

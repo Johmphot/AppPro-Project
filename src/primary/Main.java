@@ -227,7 +227,6 @@ public class Main extends JFrame {
 
 		final JTextArea chatBox = new JTextArea();
 		chatBox.setBounds(6, 7, 323, 135);
-		controlPanel.add(chatBox);
 		chatBox.setBackground(Color.LIGHT_GRAY);
 		chatBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		chatBox.setEditable(false);
@@ -302,6 +301,10 @@ public class Main extends JFrame {
 		Thread weatherThread = new Thread(wth);
 		weatherThread.start();
 		controlPanel.add(wth);
+		
+		JScrollPane scrollPane = new JScrollPane(chatBox);
+		scrollPane.setBounds(6, 6, 323, 135);
+		controlPanel.add(scrollPane);
 
 		JLabel lblZoom = new JLabel("Zoom");
 		lblZoom.setForeground(Color.WHITE);
