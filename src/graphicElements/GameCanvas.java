@@ -71,7 +71,6 @@ public class GameCanvas extends Canvas implements Runnable
 			{
 				if(arg0.getButton()==1)
 				{
-					Toolkit.getDefaultToolkit().beep();
 					IsometricSprite tile = iso.getPoint(getMousePosition().getLocation());
 					int x = Translator.toGrid(tile).x;
 					int y = Translator.toGrid(tile).y;
@@ -94,7 +93,7 @@ public class GameCanvas extends Canvas implements Runnable
 		{
 			render();
 			draw();
-
+			
 			cycleTime += FRAME_DELAY;
 			long diff = cycleTime - System.currentTimeMillis();
 			try 
@@ -193,6 +192,7 @@ public class GameCanvas extends Canvas implements Runnable
 		Point pos = Login.myUser.getPoint();
 		System.out.println(pos);
 		IsometricSprite ip = iso.getPoint(iso.calculatePos(Translator.toIso(pos)));
+		System.out.println(ip.getX()+","+ip.getY()); 
 		ip.setCurrentPos(true);
 	}
 	

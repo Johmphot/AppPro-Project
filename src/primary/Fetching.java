@@ -228,7 +228,6 @@ public class Fetching extends Thread{
 		Fetching a= new Fetching(user);
 		if(Login.myUser.look==null) Login.myUser.setIcetizenLook(user.get(Integer.parseInt(Login.myUser.getUID())).getIcetizenLook());
 		if(Login.myUser.look!=null) Login.myUser.setImage();
-		
 		try {
 			a.sleep(REFRESH_INTERVAL*1000);
 		} catch (InterruptedException e) {
