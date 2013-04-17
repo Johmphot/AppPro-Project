@@ -1,8 +1,9 @@
+// not use
+
 package primary;
 import java.applet.*; import java.net.*;
 
 import javax.swing.JApplet;
-
 
 public class Audioapp extends JApplet
 {

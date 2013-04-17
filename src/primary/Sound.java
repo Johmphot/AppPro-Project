@@ -1,3 +1,5 @@
+//not use
+
 package primary;
 import java.applet.AudioClip;
 import java.io.IOException;

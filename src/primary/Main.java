@@ -17,7 +17,6 @@ public class Main extends JFrame {
 	private JPanel contentPane;
 	private JTextField typeBox;
 	String chatDialogue="";
-	public static BGMusic music = new BGMusic();
 
 	/**
 	 * Launch the application.
@@ -50,7 +49,6 @@ public class Main extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		
-		music.start();
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
@@ -189,6 +187,14 @@ public class Main extends JFrame {
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
+		mntmHelpContents.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Help help = new Help();
+				help.setSize(800, 1000);
+			}
+		});
 		mntmHelpContents.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnHelp.add(mntmHelpContents);
@@ -199,12 +205,10 @@ public class Main extends JFrame {
 		contentPane.setLayout(null);
 
 		final graphicElements.Window window = new graphicElements.Window();
+		window.setSize(964, 560);
 		window.canvas.setBounds(0, 0, 964, 560);
-		window.setAlignmentX(Component.LEFT_ALIGNMENT);
-		window.setAlignmentY(0.0f);
-		window.setMinimumSize(new Dimension(964, 560));
-		window.setPreferredSize(new Dimension(964, 560));
 		window.setLayout(null);
+		window.setOpaque(false);
 
 		JPanel controlPanel = new JPanel();
 		controlPanel.setBackground(Color.DARK_GRAY);
@@ -286,7 +290,6 @@ public class Main extends JFrame {
 		controlPanel.add(lblWeather);
 
 		WeatherPanel wth = new WeatherPanel();
-		//weatherPanel.setBackground(Color.WHITE);
 		wth.setBounds(834, 34, 121, 98);
 		Thread weatherThread = new Thread(wth);
 		weatherThread.start();
@@ -326,11 +329,17 @@ public class Main extends JFrame {
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(6, 6, 964, 560);
 		contentPane.add(layeredPane);
-		layeredPane.setLayout(new GridLayout(0, 1, 0, 0));
-		layeredPane.add(window, new Integer(0));
 		
-		//Weather weather = new Weather();
-		//layeredPane.add(weather, new Integer(-1));
+		Weather weather = new Weather();
+		weather.setBounds(6, 6, 964, 560);
+		
+		Snow sn = new Snow();
+		sn.setOpaque(false);
+		sn.setBounds(0, 0, 964, 560);
+		
+		//layeredPane.add(weather,new Integer(-100));
+		layeredPane.add(window, new Integer(0));
+		//layeredPane.add(sn, new Integer(100));
 		
 		InputMap arrow = new InputMap();
 		ActionMap action = new ActionMap();

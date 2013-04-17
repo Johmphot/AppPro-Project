@@ -1,5 +1,6 @@
 package primary;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -65,8 +66,7 @@ public class Preferences extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				JComboBox cb = (JComboBox)e.getSource();
-				Fetch.REFRESH_INTERVAL = Integer.parseInt((String)cb.getSelectedItem());
-				System.out.println(Fetch.REFRESH_INTERVAL);
+				Fetching.REFRESH_INTERVAL = Integer.parseInt((String)cb.getSelectedItem());
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
@@ -109,9 +109,8 @@ public class Preferences extends JFrame {
 		lblSounds.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		panel_2.add(lblSounds);
 
-		JSlider slider = new JSlider();
-		slider.setMinimum(-80);
-		slider.setMaximum(6);
+		final JSlider slider = new JSlider();
+		slider.setValue((int)((BGMusic.gainControl.getValue()+80)/86)*100);
 		slider.addChangeListener(new ChangeListener() 
 		{
 			public void stateChanged(ChangeEvent e) 
@@ -120,7 +119,7 @@ public class Preferences extends JFrame {
 				if (!source.getValueIsAdjusting()) 
 				{
 					int level = (int) source.getValue();
-					Main.music.adjustVolume(level);
+					Login.music.adjustVolume(((level/100)*86)-80);
 				}
 			}
 		});

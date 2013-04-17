@@ -14,7 +14,7 @@ public class IsometricMap implements Drawable
 	private int MAX_TILES_X = 100;
 	private int MAX_TILES_Y = 100;
 
-	private HashMap<Point, IsometricSprite> pointMap = null;
+	public HashMap<Point, IsometricSprite> pointMap = null;
 	private int last_x, total_rows;
 	private Point mousePoint = null;
 	private Point focusPoint = null;

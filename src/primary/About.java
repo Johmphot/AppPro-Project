@@ -14,6 +14,7 @@ public class About extends JFrame{
 	ImagePanel aboutPanel;
 
 	public About(){
+		setTitle("About");
 		setImage();
 		setSize(980, 351);
 		setGUI();

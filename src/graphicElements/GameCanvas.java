@@ -15,6 +15,8 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JPanel;
+
 import primary.Login;
 
 public class GameCanvas extends Canvas implements Runnable 
@@ -92,6 +94,7 @@ public class GameCanvas extends Canvas implements Runnable
 		{
 			render();
 			draw();
+			showCurrentPosition();
 
 			cycleTime += FRAME_DELAY;
 			long diff = cycleTime - System.currentTimeMillis();
@@ -188,10 +191,9 @@ public class GameCanvas extends Canvas implements Runnable
 	
 	public void showCurrentPosition()
 	{
-		Point pos = new Point(0,0);
-		if(Login.myUser.getPoint()!=null) pos = Login.myUser.getPoint();
-		IsometricSprite ip = iso.getPoint(Translator.toIso(pos));
+		Point pos = Login.myUser.getPoint();
 		System.out.println(pos);
+		IsometricSprite ip = iso.getPoint(Translator.toIso(pos));
 		ip.setCurrentPos(true);
 	}
 	

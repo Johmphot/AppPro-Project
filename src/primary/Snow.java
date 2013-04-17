@@ -1,23 +1,23 @@
 package primary;
-import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import javax.swing.JPanel;
 
-public class Snow extends Applet implements Runnable{
+
+public class Snow extends JPanel implements Runnable{
 
 	Thread ani;
 	
 	public Snow(){
-		setSize(500,500);
+		setOpaque(false);
 		ani = new Thread(this);
 		ani.start();
 	}
 	
 	public void paint(Graphics g){
 		g.setColor(Color.black);
-		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		
 		Dimension d = this.getSize();
 		

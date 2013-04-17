@@ -28,20 +28,41 @@ public class Icetizen implements MyIcetizen
 {
 
 	public static IcetizenLook look;
-	public String uid, ip;
-	int port, portID, listeningPort, type, x, y;
+	public String uid, ip, time, talk, yell, key;
+	int port, portID, listeningPort, type, x, y, newX, newY;
 	public String username;
-	public Point p= new Point();
-	BufferedImage img;
+	public Point p= new Point(), newP= new Point();
+	BufferedImage img, last;
 	static JSONParser json = new JSONParser();
+	Map jsonMap;
+	List<Map>jsonData = null;
 	 static ContainerFactory containerFactory = new ContainerFactory() {
 		    public List creatArrayContainer() { return new LinkedList(); } 
 		    public Map createObjectContainer() { return new LinkedHashMap(); }
 
 	 };
+	 
 
-	@Override
+	/*
+	public Icetizen(String key){
+		this.uid=key;
+		refresh();
+	}
 	
+	public void refresh(){
+		try {
+			this.fetchLook();
+		} catch (org.json.simple.parser.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
+	 
+	public Icetizen(){
+		
+	}
+	 
+	@Override
 	public int getIcePortID() 
 	{
 		return portID;
@@ -53,16 +74,21 @@ public class Icetizen implements MyIcetizen
 		return look;
 	}
 	
+	public Icetizen(String uid){
+		this.uid=uid;
+	}
+	
 
 	public void fetchLook() throws org.json.simple.parser.ParseException{
 		IcetizenLook lookk = new IcetizenLook();
 		String inputLine = "";
 		try
 	    {
-	      URL url = new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+uid);
+	      URL url = new URL("http://iceworld.sls-atl.com/api/&cmd=gresources&uid="+this.getUID());
 	      URLConnection urlc = url.openConnection();
 	      BufferedReader in = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
 	      String buffs;
+	      System.out.println("URL UID"+url);
 	      while ((buffs = in.readLine()) != null)
 	      {
 	        inputLine = inputLine + buffs;
@@ -71,22 +97,25 @@ public class Icetizen implements MyIcetizen
 	    }
 	    catch (Exception e)
 	    {
-	      System.out.println("Error");
+	      System.out.println("err at fetch");
+	      e.printStackTrace();
 	    }
+		System.out.println("inputL: "+ inputLine);
 		List<Map> jsonData = null;
 		try {
 			Map jsonMap = (Map)json.parse(inputLine, containerFactory);
-			jsonData = (List<Map>)jsonMap.get("data");
+			jsonData = (List<Map>) jsonMap.get("data");
+			//System.out.println(jsonData.get(0).get("B"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		lookk.gidH = ((String) jsonData.get(0).get("H")==null) ? "H008": (String) jsonData.get(0).get("H");
-		lookk.gidB = ((String) jsonData.get(0).get("B")==null) ? "B001": (String) jsonData.get(0).get("B");
-		lookk.gidW = ((String) jsonData.get(0).get("W")==null) ? "S019": (String) jsonData.get(0).get("W");
-		lookk.gidS = ((String) jsonData.get(0).get("S")==null) ? "W050": (String) jsonData.get(0).get("S");
+		lookk.gidH = ( (String)jsonData.get(0).get("H")==null) ? "H008": jsonData.get(0).get("H").toString();
+		lookk.gidB = ( (String)jsonData.get(0).get("B")==null) ? "B001": jsonData.get(0).get("B").toString();
+		lookk.gidW = ( (String)jsonData.get(0).get("W")==null) ? "S019": jsonData.get(0).get("W").toString();
+		lookk.gidS = ((String)jsonData.get(0).get("S")==null) ? "W050":  jsonData.get(0).get("S").toString();
 		this.setIcetizenLook(lookk);
-		System.out.println(username +look.gidB+" "+look.gidH+" "+look.gidS+ " "+look.gidW);
+		//System.out.println(username +look.gidB+" "+look.gidH+" "+look.gidS+ " "+look.gidW);
 	}
 	
 	@Override
@@ -107,6 +136,14 @@ public class Icetizen implements MyIcetizen
 	
 	public Point getPoint(){
 		return p;
+	}
+	
+	public Point getNewPoint(){
+		return newP;
+	}
+	
+	public String getTime(){
+		return time;
 	}
 
 	@Override
@@ -146,6 +183,17 @@ public class Icetizen implements MyIcetizen
 		this.y=y;
 	}
 	
+	public void setNewPoint(int newX, int newY){
+		this.newP.x=newX;
+		this.newP.y=newY;
+		this.newX=newX;
+		this.newY=newY;
+	}
+	
+	public void setTime(String time){
+		this.time=time;
+	}
+	
 	public void setImage()
 	{
 		img = new BufferedImage(400,500, BufferedImage.TYPE_INT_ARGB);
@@ -177,7 +225,8 @@ public class Icetizen implements MyIcetizen
 	
 	public Image getImage()
 	{
-		return img;
+		last = img;
+		return last;
 	}
 	
 	public Image getComponentImage(String id)
@@ -221,6 +270,15 @@ public class Icetizen implements MyIcetizen
 		catch (IOException e) {}
 	
 		return img;
+	}
+	
+
+	public void talk(String msg){
+		Login.immigration.talk(msg);
+	}
+	
+	public void yell(String msg){
+		Login.immigration.yell(msg);
 	}
 	
 	

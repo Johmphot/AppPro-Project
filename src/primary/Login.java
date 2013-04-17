@@ -37,7 +37,9 @@ public class Login extends JFrame
 	private JPasswordField passwordField;
 	public static Icetizen myUser;
 	public static ICEWorldImmigration immigration;
+	public static String username;
 	int listeningPort = 12345;
+	public static BGMusic music = new BGMusic();
 
 	/**
 	 * Launch the application.
@@ -74,7 +76,7 @@ public class Login extends JFrame
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		
-		Main.music.start();
+		if(!music.isAlive()) music.start();
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
@@ -166,6 +168,14 @@ public class Login extends JFrame
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
+		mntmHelpContents.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Help help = new Help();
+				help.setSize(800, 1000);
+			}
+		});
 		mntmHelpContents.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		mntmHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnHelp.add(mntmHelpContents);
@@ -202,19 +212,13 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				Toolkit.getDefaultToolkit().beep();
 				String name = formattedTextField.getText();
 				String password = new String(passwordField.getPassword());
 				if (userLogin(name,password))
 				{
-					LinkedList<Icetizen> user = new LinkedList<Icetizen>();
-					Fetch a = new Fetch(user);
-					a.start();
 					Main world = new Main(name);
 					dispose();
-					world.setVisible(true);
-					
+					world.setVisible(true);	
 				}
 				else
 				{
@@ -255,6 +259,7 @@ public class Login extends JFrame
 	{
 		myUser = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) myUser);
+		this.username = username;
 		myUser.setIcePortID(253); //Port ID 253
 		myUser.setUsername(username);
 		myUser.setListeningPort(listeningPort);
@@ -265,14 +270,14 @@ public class Login extends JFrame
 			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
 			listeningPort++;
 			LinkedList<Icetizen> user = new LinkedList<Icetizen>();
-			Fetch a = new Fetch(user);
-			a.start();
+			Fetching fetch = new Fetching(user);
+			fetch.start();
 			try 
 			{
 				myUser.fetchLook();
-				myUser.setImage();
 			} 
 			catch (ParseException e) {}
+			myUser.setImage();
 			return true;
 		}
 		else return false;

@@ -1,3 +1,4 @@
+package primary;
 import java.awt.*;
 import java.io.IOException;
 import java.net.*;
@@ -24,7 +25,7 @@ JPanel GlossaryContentPane;
 JEditorPane GlossaryContent;
 
 	public Help(){
-		this.setSize(800, 1000);
+		this.setTitle("Help");
 		setLocationRelativeTo(null);
 		
 		setupTabbedPane();
