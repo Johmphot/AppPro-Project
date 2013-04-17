@@ -2,6 +2,7 @@ package primary;
 import iceworld.given.*;
 
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ import org.json.simple.parser.ParseException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.lang.Thread.State;
 import java.util.LinkedList;
 
 public class Login extends JFrame 
@@ -35,6 +37,7 @@ public class Login extends JFrame
 	private JPasswordField passwordField;
 	public static Icetizen myUser;
 	public static ICEWorldImmigration immigration;
+	int listeningPort = 12345;
 
 	/**
 	 * Launch the application.
@@ -70,7 +73,9 @@ public class Login extends JFrame
 		setTitle("Login To ICE World");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-
+		
+		Main.music.start();
+		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
 		setJMenuBar(menuBar);
@@ -197,6 +202,8 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				
+				Toolkit.getDefaultToolkit().beep();
 				String name = formattedTextField.getText();
 				String password = new String(passwordField.getPassword());
 				if (userLogin(name,password))
@@ -204,9 +211,6 @@ public class Login extends JFrame
 					LinkedList<Icetizen> user = new LinkedList<Icetizen>();
 					Fetch a = new Fetch(user);
 					a.start();
-					try {
-						myUser.fetchLook();
-					} catch (ParseException e1) {}
 					Main world = new Main(name);
 					dispose();
 					world.setVisible(true);
@@ -253,21 +257,22 @@ public class Login extends JFrame
 		immigration = new ICEWorldImmigration((MyIcetizen) myUser);
 		myUser.setIcePortID(253); //Port ID 253
 		myUser.setUsername(username);
-		myUser.setListeningPort(10018);
+		myUser.setListeningPort(listeningPort);
 		if(immigration.login(password))
 		{
 
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "Login as "+username, "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			listeningPort++;
 			LinkedList<Icetizen> user = new LinkedList<Icetizen>();
 			Fetch a = new Fetch(user);
 			a.start();
 			try 
 			{
 				myUser.fetchLook();
+				myUser.setImage();
 			} 
 			catch (ParseException e) {}
-			myUser.setImage();
 			return true;
 		}
 		else return false;
@@ -278,7 +283,7 @@ public class Login extends JFrame
 		myUser = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) myUser); 
 		myUser.setIcePortID(253); //Port ID 253
-		myUser.setListeningPort(10018);
+		myUser.setListeningPort(listeningPort);
 		IcetizenLook look = new IcetizenLook();
 		look.gidB = "B001";
 		look.gidH = "H001";
@@ -289,6 +294,7 @@ public class Login extends JFrame
 		{
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "Login as an Alien", "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
+			listeningPort++;
 			return true;
 		}
 		else return false;

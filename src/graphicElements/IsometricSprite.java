@@ -96,14 +96,14 @@ public class IsometricSprite implements Drawable
 	 * @param g
 	 */
 	public int n =1;
-	public void drawPoint(Graphics g)
+	public void drawIcetizen(Graphics g)
 	{
 		rect = poly.getBounds();
-		if(currentPos) 
+		if(focused) 
 		{
 			Image image = Login.myUser.getImage();
 			g.drawImage(image, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);
-			this.setBuildable(false);
+			
 		}
 		
 	}
@@ -115,7 +115,7 @@ public class IsometricSprite implements Drawable
 			return;
 
 		drawOutlines(g);
-		drawPoint(g);
+		drawIcetizen(g);
 
 		regeneratePoly();
 	}

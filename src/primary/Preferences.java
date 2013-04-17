@@ -12,6 +12,10 @@ import javax.swing.JSlider;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 
 public class Preferences extends JFrame {
@@ -56,7 +60,17 @@ public class Preferences extends JFrame {
 		panel.add(lblRefreshInterval);
 
 		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JComboBox cb = (JComboBox)e.getSource();
+				Fetch.REFRESH_INTERVAL = Integer.parseInt((String)cb.getSelectedItem());
+				System.out.println(Fetch.REFRESH_INTERVAL);
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox.setSelectedIndex(4);
 		comboBox.setBounds(122, 39, 68, 27);
 		panel.add(comboBox);
 
@@ -96,7 +110,20 @@ public class Preferences extends JFrame {
 		panel_2.add(lblSounds);
 
 		JSlider slider = new JSlider();
-		slider.setPaintLabels(true);
+		slider.setMinimum(-80);
+		slider.setMaximum(6);
+		slider.addChangeListener(new ChangeListener() 
+		{
+			public void stateChanged(ChangeEvent e) 
+			{
+				JSlider source = (JSlider) e.getSource();
+				if (!source.getValueIsAdjusting()) 
+				{
+					int level = (int) source.getValue();
+					Main.music.adjustVolume(level);
+				}
+			}
+		});
 		slider.setMajorTickSpacing(100);
 		slider.setPaintTicks(true);
 		slider.setMinorTickSpacing(5);

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -14,10 +15,12 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferStrategy;
 
+import primary.Login;
+
 public class GameCanvas extends Canvas implements Runnable 
 {
-	private final long FRAME_DELAY = 16; // 62.5fps
-	private final int MIN_SLEEP_TIME = 2;
+	private final long FRAME_DELAY = 16; 
+	private final int MIN_SLEEP_TIME = 4;
 
 	private final int HEIGHT = 560;
 	private final int WIDTH = 964;
@@ -66,6 +69,7 @@ public class GameCanvas extends Canvas implements Runnable
 			{
 				if(arg0.getButton()==1)
 				{
+					Toolkit.getDefaultToolkit().beep();
 					IsometricSprite tile = iso.getPoint(getMousePosition().getLocation());
 					int x = Translator.toGrid(tile).x;
 					int y = Translator.toGrid(tile).y;
@@ -182,29 +186,24 @@ public class GameCanvas extends Canvas implements Runnable
 		}
 	}
 	
+	public void showCurrentPosition()
+	{
+		Point pos = new Point(0,0);
+		if(Login.myUser.getPoint()!=null) pos = Login.myUser.getPoint();
+		IsometricSprite ip = iso.getPoint(Translator.toIso(pos));
+		System.out.println(pos);
+		ip.setCurrentPos(true);
+	}
+	
 	public void animateWalk(int nx,int ny)
 	{
-		int ox,oy; // get old position from Iceworld
+		Point pos = Login.myUser.getPoint();
+		int ox = Login.myUser.getPoint().x;
+		int oy = Login.myUser.getPoint().y;
+		System.out.println(ox+","+oy);
 		IsometricSprite ip,previous;
-		int x=ox, y=oy;
-		while(ox!=nx)
-		{
-			previous = iso.getPoint(Translator.toIso(new Point(x-1,y)));
-			previous.setCurrentPos(false);
-			ip = iso.getPoint(Translator.toIso(new Point(x,y)));
-			ip.setCurrentPos(true);
-			if(x>nx) x--;
-			if(x<nx) x++;
-		}
-		while(oy!=ny)
-		{
-			previous = iso.getPoint(Translator.toIso(new Point(x,y-1)));
-			previous.setCurrentPos(false);
-			ip = iso.getPoint(Translator.toIso(new Point(x,y)));
-			ip.setCurrentPos(true);
-			if(y>ny) y--;
-			if(y<ny) y++;
-		}
+		previous = iso.getPoint(pos);
+		previous.setCurrentPos(true);
 	}
 
 }

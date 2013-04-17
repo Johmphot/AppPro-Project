@@ -163,24 +163,6 @@ public class Icetizen implements MyIcetizen
 		g.drawImage(imgS, 0, 0, null);
 		g.drawImage(imgW, 0, 0, null);
 		
-		int body = Integer.parseInt(look.gidB.substring(1));
-		int head = Integer.parseInt(look.gidH.substring(1));
-		int shirt = Integer.parseInt(look.gidS.substring(1));
-		int weapon = Integer.parseInt(look.gidW.substring(1));
-		try
-		{
-			Customize.getGraphicsArray();
-			imgB = Customize.getBody(body).getImage();
-			imgH = Customize.getHead(head).getImage();
-			imgS = Customize.getShirt(shirt).getImage();
-			imgW = Customize.getWeapon(weapon).getImage();
-	
-			g.drawImage(imgB, 0, 0, null);
-			g.drawImage(imgH, 0, 0, null);
-			g.drawImage(imgS, 0, 0, null);
-			g.drawImage(imgW, 0, 0, null);
-		}
-		catch(IOException e){}
 	}
 	public void setImage(Image imgB,Image imgH,Image imgS,Image imgW)
 	{
@@ -240,7 +222,6 @@ public class Icetizen implements MyIcetizen
 	
 		return img;
 	}
-	
 	
 	
 }

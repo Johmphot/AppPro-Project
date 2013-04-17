@@ -9,12 +9,15 @@ import java.io.IOException;
 import javax.swing.border.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField typeBox;
 	String chatDialogue="";
+	public static BGMusic music = new BGMusic();
 
 	/**
 	 * Launch the application.
@@ -46,6 +49,8 @@ public class Main extends JFrame {
 		setTitle("ICE World: "+name);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
+		
+		music.start();
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
@@ -138,30 +143,30 @@ public class Main extends JFrame {
 		mnAccount.setBackground(Color.LIGHT_GRAY);
 		menuBar.add(mnAccount);
 
-		JMenuItem mntmCustomization = new JMenuItem("Customization...");
-		mntmCustomization.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
-		mntmCustomization.addActionListener(new ActionListener() 
+		if (!name.equals("Alien")) 
 		{
-			public void actionPerformed(ActionEvent e) 
-			{
+			JMenuItem mntmCustomization = new JMenuItem("Customization...");
+			mntmCustomization
+					.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+			mntmCustomization.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 
-				Customize c;
-				try {
-					c = new Customize();
-					c.setVisible(true);
-					c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					Customize c;
+					try {
+						c = new Customize();
+						c.setVisible(true);
+						c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 				}
-				
-			}
-		});
-		mnAccount.add(mntmCustomization);
-
-		JSeparator separator_2 = new JSeparator();
-		mnAccount.add(separator_2);
-
+			});
+			mnAccount.add(mntmCustomization);
+			JSeparator separator_2 = new JSeparator();
+			mnAccount.add(separator_2);
+		}
 		JMenuItem mntmLogout = new JMenuItem("Logout");
 		mntmLogout.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		mntmLogout.addActionListener(new ActionListener() 
@@ -199,8 +204,6 @@ public class Main extends JFrame {
 		window.setAlignmentY(0.0f);
 		window.setMinimumSize(new Dimension(964, 560));
 		window.setPreferredSize(new Dimension(964, 560));
-		window.setBounds(6, 6, 964, 560);
-		contentPane.add(window);
 		window.setLayout(null);
 
 		JPanel controlPanel = new JPanel();
@@ -216,13 +219,13 @@ public class Main extends JFrame {
 		chatBox.setBackground(Color.LIGHT_GRAY);
 		chatBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		chatBox.setEditable(false);
-		
-				typeBox = new JTextField();
-				typeBox.setBounds(395, 21, 323, 55);
-				controlPanel.add(typeBox);
-				typeBox.setBackground(Color.LIGHT_GRAY);
-				typeBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
-				typeBox.setColumns(10);
+
+		typeBox = new JTextField();
+		typeBox.setBounds(395, 21, 323, 55);
+		controlPanel.add(typeBox);
+		typeBox.setBackground(Color.LIGHT_GRAY);
+		typeBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		typeBox.setColumns(10);
 		
 		JButton btnTalk = new JButton("Talk");
 		btnTalk.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
@@ -232,6 +235,7 @@ public class Main extends JFrame {
 		{
 		     public void actionPerformed(ActionEvent ae)
 		     {
+		    	 Toolkit.getDefaultToolkit().beep();
 		    	 String text = typeBox.getText();
 		    	 if (text.length()<=100) 
 		    	 {
@@ -253,12 +257,17 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				Toolkit.getDefaultToolkit().beep();
 				String text = typeBox.getText().toUpperCase();
 		    	 if (text.length()<=10) 
 		    	 {
 					Login.immigration.yell(text);
 					chatDialogue += text + "\n";
 					chatBox.setText(chatDialogue);
+					toggleYell y = new toggleYell(text);
+					Timer timer = new Timer();
+				    timer.schedule(y,5000);
+				    
 		    	 }
 		    	 else
 		    	 {
@@ -276,7 +285,7 @@ public class Main extends JFrame {
 		lblWeather.setBounds(864, 6, 61, 16);
 		controlPanel.add(lblWeather);
 
-		Weather wth = new Weather();
+		WeatherPanel wth = new WeatherPanel();
 		//weatherPanel.setBackground(Color.WHITE);
 		wth.setBounds(834, 34, 121, 98);
 		Thread weatherThread = new Thread(wth);
@@ -314,6 +323,14 @@ public class Main extends JFrame {
 		slider.setBounds(982, 28, 36, 530);
 		contentPane.add(slider);
 		
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(6, 6, 964, 560);
+		contentPane.add(layeredPane);
+		layeredPane.setLayout(new GridLayout(0, 1, 0, 0));
+		layeredPane.add(window, new Integer(0));
+		
+		//Weather weather = new Weather();
+		//layeredPane.add(weather, new Integer(-1));
 		
 		InputMap arrow = new InputMap();
 		ActionMap action = new ActionMap();
@@ -397,4 +414,25 @@ public class Main extends JFrame {
 	        }
 		});
 	}
+	
+	public class toggleYell extends TimerTask
+	{
+		JDialog frame;
+		
+		public toggleYell(String t)
+		{
+			frame = new JDialog();
+			frame.setSize(1000,400);
+			JLabel txt = new JLabel(t);
+			txt.setFont(new Font("Helvetica Neue", Font.BOLD, 150));
+			frame.getContentPane().setLayout(new GridLayout(1,1,0,0));
+			frame.getContentPane().add(txt);
+			frame.setVisible(true);
+		}
+		public void run()
+		{
+			frame.dispose();
+		}
+	}
 }
+

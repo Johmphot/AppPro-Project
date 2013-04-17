@@ -39,12 +39,7 @@ public class Sound // Holds one audio file
 	{
 		clip.loop(clip.LOOP_CONTINUOUSLY);
 	}
-	public void decrease()//decrease volume
-	{
-	    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-	    gainControl.setValue(10.0f); // Reduce volume by 10 decibels.
-	}
-	public void increase()//increase volume
+	public void adjustVolume(int value)//decrease volume
 	{
 	    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	    gainControl.setValue(-10.0f); // Reduce volume by 10 decibels.
