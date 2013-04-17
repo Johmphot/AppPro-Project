@@ -134,8 +134,17 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				Login.effect.play();
-				Login.immigration.logout();
-				System.exit(0);
+				JDialog exit = new JDialog();
+				int n = JOptionPane.showConfirmDialog(exit,"Do you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
+				if(n==JOptionPane.YES_OPTION)
+				{
+					Login.immigration.logout();
+					System.exit(0);
+				}
+				else
+				{
+					exit.dispose();
+				}
 			}
 		});
 		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));

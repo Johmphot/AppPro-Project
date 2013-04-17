@@ -16,6 +16,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -38,6 +39,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.Thread.State;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -174,7 +178,16 @@ public class Login extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				effect.play();
-				System.exit(0);
+				JDialog exit = new JDialog();
+				int n = JOptionPane.showConfirmDialog(exit,"Do you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
+				if(n==JOptionPane.YES_OPTION)
+				{
+					System.exit(0);
+				}
+				else
+				{
+					exit.dispose();
+				}
 			}
 		});
 		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
@@ -358,6 +371,7 @@ public class Login extends JFrame
 
 	public boolean userLogin(String username,String password)
 	{
+		checkConnection();
 		myUser = new Icetizen();
 		immigration = new ICEWorldImmigration((MyIcetizen) myUser);
 		this.username = username;
@@ -424,5 +438,26 @@ public class Login extends JFrame
 			return true;
 		}
 		else return false;
+	}
+	
+	public void checkConnection()
+	{
+		URL url = null;
+		try
+		{
+			url = new URL("http://iceworld.sls-atl.com/");	
+			URLConnection check = url.openConnection();
+			check.connect();
+		}
+		catch(MalformedURLException e)
+		{
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "ICE World could not be reached", "Connection Error", JOptionPane.ERROR_MESSAGE);
+		}
+		catch(IOException e)
+		{
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, "ICE World could not be reached", "Connection Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
