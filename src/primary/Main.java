@@ -17,7 +17,6 @@ public class Main extends JFrame {
 	private JPanel contentPane;
 	private JTextField typeBox;
 	String chatDialogue="";
-
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +48,8 @@ public class Main extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		
-
+		Login.music.music();
+		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
 		setJMenuBar(menuBar);
@@ -69,6 +69,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				Login.effect.play();
 				Login newFrame = new Login();
 				newFrame.setVisible(true);
 			}
@@ -84,6 +85,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				Login.effect.play();
 				try 
 				{
 					ICEWorldPeek.main(null);
@@ -99,6 +101,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				Login.effect.play();
 				Preferences pref = new Preferences();
 				pref.setVisible(true);
 				pref.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -115,6 +118,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				Login.effect.play();
 				About ab = new About();
 				ab.setVisible(true);
 			}
@@ -129,6 +133,7 @@ public class Main extends JFrame {
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				Login.effect.play();
 				Login.immigration.logout();
 				System.exit(0);
 			}
@@ -149,6 +154,7 @@ public class Main extends JFrame {
 			mntmCustomization.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
+					Login.effect.play();
 					Customize c;
 					try {
 						c = new Customize();
@@ -173,6 +179,7 @@ public class Main extends JFrame {
 			{
 				if(Login.immigration.logout())
 				{
+					Login.effect.play();
 					dispose();
 					Login newFrame = new Login();
 					newFrame.setVisible(true);
@@ -191,6 +198,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				Login.effect.play();
 				Help help = new Help();
 				help.setSize(800, 1000);
 			}
@@ -239,7 +247,7 @@ public class Main extends JFrame {
 		{
 		     public void actionPerformed(ActionEvent ae)
 		     {
-		    	 Toolkit.getDefaultToolkit().beep();
+		    	 Login.effect.play();
 		    	 String text = typeBox.getText();
 		    	 if (text.length()<=100) 
 		    	 {
@@ -261,7 +269,7 @@ public class Main extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				Toolkit.getDefaultToolkit().beep();
+				Login.effect.play();
 				String text = typeBox.getText().toUpperCase();
 		    	 if (text.length()<=10) 
 		    	 {

@@ -79,8 +79,8 @@ public class IsometricSprite implements Drawable
 		else 
 		{
 			g.drawPolygon(poly);
-			//g.setColor(new Color(35,135,10));
-			//g.fillPolygon(poly);
+			g.setColor(new Color(35,135,10));
+			g.fillPolygon(poly);
 		}
 	}
 
@@ -101,7 +101,7 @@ public class IsometricSprite implements Drawable
 	public void drawIcetizen(Graphics g)
 	{
 		rect = poly.getBounds();
-		if(currentPos) 
+		if(focused) 
 		{
 			Image image = Login.myUser.getImage();
 			g.drawImage(image, rect.x, rect.y-width/2,4*(width/2) ,5*(height/2) , null);

@@ -11,19 +11,19 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-public class BGMusic
+public class SEMusic
 {
 	static Clip clip;
-	public static FloatControl BGgainControl;
+	public static FloatControl SEgainControl;
 	
-	public void music()
+	public void play()
 	{
 		try 
 		{
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/BackgroundMusic.wav"));
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/button.wav"));
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			clip.loop(clip.LOOP_CONTINUOUSLY);
+			clip.start();
 		} 
 		catch (UnsupportedAudioFileException e) {} 
 		catch (IOException e) {} 
@@ -31,12 +31,12 @@ public class BGMusic
 	}
 	public void decrease()
 	{
-	    BGgainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-	    BGgainControl.setValue(-5.0f);
+	    SEgainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	    SEgainControl.setValue(-5.0f);
 	}
 	public void increase()
 	{
-	    BGgainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-	    BGgainControl.setValue(5.0f);
+	    SEgainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	    SEgainControl.setValue(5.0f);
 	}
 }

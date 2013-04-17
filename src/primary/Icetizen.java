@@ -32,7 +32,7 @@ public class Icetizen implements MyIcetizen
 	int port, portID, listeningPort, type, x, y, newX, newY;
 	public String username;
 	public Point p= new Point(), newP= new Point();
-	BufferedImage img, last;
+	public BufferedImage img, last;
 	static JSONParser json = new JSONParser();
 	Map jsonMap;
 	List<Map>jsonData = null;
@@ -211,6 +211,7 @@ public class Icetizen implements MyIcetizen
 		g.drawImage(imgS, 0, 0, null);
 		g.drawImage(imgW, 0, 0, null);
 		
+		last = img;
 	}
 	public void setImage(Image imgB,Image imgH,Image imgS,Image imgW)
 	{
@@ -220,12 +221,11 @@ public class Icetizen implements MyIcetizen
 		g.drawImage(imgH, 0, 0, null);
 		g.drawImage(imgS, 0, 0, null);
 		g.drawImage(imgW, 0, 0, null);
-		
+		last = img;
 	}
 	
 	public Image getImage()
 	{
-		last = img;
 		return last;
 	}
 	

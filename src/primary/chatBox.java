@@ -13,7 +13,7 @@ import java.net.URLConnection;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class chatBox extends JFrame implements ActionListener{
+public class chatBox extends JPanel implements ActionListener{
  
  private JTextField textField;
  private JTextArea textArea;

@@ -88,7 +88,7 @@ public class IsometricMap implements Drawable
 		}
 	}
 
-	private Point calculatePos(Point mid) {
+	public Point calculatePos(Point mid) {
 		IsometricSprite ip = pointMap.get(mid);
 		Point tmp = ip.getCenter();
 		int tmp_x = WIDTH / 2 - tmp.x;

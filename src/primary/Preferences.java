@@ -17,10 +17,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JButton;
+import java.awt.Color;
 
 
 public class Preferences extends JFrame {
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -42,25 +43,31 @@ public class Preferences extends JFrame {
 	 * Create the frame.
 	 */
 	public Preferences() {
+		getContentPane().setBackground(Color.DARK_GRAY);
 		setTitle("Preferences");
 		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 25, 296, 247);
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(6, 25, 628, 247);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JLabel lblIceWorld = new JLabel("ICE World");
-		lblIceWorld.setBounds(0, 0, 68, 19);
-		lblIceWorld.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblIceWorld.setForeground(Color.WHITE);
+		lblIceWorld.setBounds(6, 6, 82, 19);
+		lblIceWorld.setFont(new Font("Helvetica Neue", Font.BOLD, 16));
 		panel.add(lblIceWorld);
 
 		JLabel lblRefreshInterval = new JLabel("Refresh Interval");
-		lblRefreshInterval.setBounds(6, 43, 104, 16);
+		lblRefreshInterval.setForeground(Color.WHITE);
+		lblRefreshInterval.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		lblRefreshInterval.setBounds(34, 43, 104, 16);
 		panel.add(lblRefreshInterval);
 
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 		comboBox.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -71,88 +78,81 @@ public class Preferences extends JFrame {
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox.setSelectedIndex(4);
-		comboBox.setBounds(122, 39, 68, 27);
+		comboBox.setBounds(151, 39, 68, 27);
 		panel.add(comboBox);
 
-		JPanel panel_World = new JPanel();
-		panel_World.setBounds(314, 25, 296, 247);
-		getContentPane().add(panel_World);
-		panel_World.setLayout(null);
-
-		JLabel lblIcetizens = new JLabel("ICE-tizens");
-		lblIcetizens.setBounds(0, 0, 75, 19);
-		lblIcetizens.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		panel_World.add(lblIcetizens);
-
-		JLabel lblTalkingBubbleDuration = new JLabel("Talking Bubble Duration");
-		lblTalkingBubbleDuration.setBounds(10, 41, 161, 16);
-		panel_World.add(lblTalkingBubbleDuration);
-
-		textField = new JTextField();
-		textField.setText("5");
-		textField.setBounds(177, 35, 44, 28);
-		panel_World.add(textField);
-		textField.setColumns(10);
-
-		JLabel lblSeconds = new JLabel("seconds");
-		lblSeconds.setBounds(233, 41, 61, 16);
-		panel_World.add(lblSeconds);
-
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.DARK_GRAY);
 		panel_2.setAlignmentX(0.1f);
-		panel_2.setBounds(6, 284, 604, 144);
+		panel_2.setBounds(6, 284, 628, 144);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 
 		JLabel lblSounds = new JLabel("Sounds");
-		lblSounds.setBounds(6, 6, 52, 19);
-		lblSounds.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblSounds.setForeground(Color.WHITE);
+		lblSounds.setBounds(6, 6, 62, 19);
+		lblSounds.setFont(new Font("Helvetica Neue", Font.BOLD, 16));
 		panel_2.add(lblSounds);
-
-		final JSlider slider = new JSlider();
-		slider.setValue((int)((BGMusic.gainControl.getValue()+80)/86)*100);
-		slider.addChangeListener(new ChangeListener() 
-		{
-			public void stateChanged(ChangeEvent e) 
-			{
-				JSlider source = (JSlider) e.getSource();
-				if (!source.getValueIsAdjusting()) 
-				{
-					int level = (int) source.getValue();
-					Login.music.adjustVolume(((level/100)*86)-80);
-				}
-			}
-		});
-		slider.setMajorTickSpacing(100);
-		slider.setPaintTicks(true);
-		slider.setMinorTickSpacing(5);
-		slider.setBounds(6, 87, 296, 51);
-		panel_2.add(slider);
-
-		JSlider slider_1 = new JSlider();
-		slider_1.setPaintLabels(true);
-		slider_1.setMajorTickSpacing(100);
-		slider_1.setMinorTickSpacing(5);
-		slider_1.setPaintTicks(true);
-		slider_1.setBounds(302, 87, 296, 51);
-		panel_2.add(slider_1);
+		int value;
 
 		JLabel lblBackgroundVolume = new JLabel("Background Music Volume");
-		lblBackgroundVolume.setBounds(70, 59, 166, 16);
+		lblBackgroundVolume.setForeground(Color.WHITE);
+		lblBackgroundVolume.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		lblBackgroundVolume.setBounds(73, 40, 172, 16);
 		panel_2.add(lblBackgroundVolume);
 
 		JLabel lblSoundEffectVolume = new JLabel("Sound Effect Volume");
-		lblSoundEffectVolume.setBounds(392, 59, 130, 16);
+		lblSoundEffectVolume.setForeground(Color.WHITE);
+		lblSoundEffectVolume.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		lblSoundEffectVolume.setBounds(389, 40, 142, 16);
 		panel_2.add(lblSoundEffectVolume);
-
-		JSeparator separator = new JSeparator();
-		separator.setBounds(6, 272, 604, 12);
-		getContentPane().add(separator);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setBounds(301, 6, 12, 272);
-		getContentPane().add(separator_1);
+		
+		JButton bm_vDown = new JButton("<");
+		bm_vDown.setBackground(Color.GRAY);
+		bm_vDown.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Login.music.decrease();
+			}
+		});
+		bm_vDown.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+		bm_vDown.setBounds(39, 76, 117, 47);
+		panel_2.add(bm_vDown);
+		
+		JButton bm_vUp = new JButton(">");
+		bm_vUp.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+		bm_vUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				Login.music.increase();
+			}
+		});
+		bm_vUp.setBounds(156, 76, 117, 47);
+		panel_2.add(bm_vUp);
+		
+		JButton se_vUp = new JButton(">");
+		se_vUp.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+		se_vUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				Login.effect.increase();
+			}
+		});
+		se_vUp.setBounds(453, 76, 117, 47);
+		panel_2.add(se_vUp);
+		
+		JButton se_vDown = new JButton("<");
+		se_vDown.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+		se_vDown.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Login.effect.decrease();
+			}
+		});
+		se_vDown.setBounds(328, 76, 117, 47);
+		panel_2.add(se_vDown);
 
 	}
 }

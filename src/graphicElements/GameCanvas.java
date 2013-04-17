@@ -94,7 +94,6 @@ public class GameCanvas extends Canvas implements Runnable
 		{
 			render();
 			draw();
-			showCurrentPosition();
 
 			cycleTime += FRAME_DELAY;
 			long diff = cycleTime - System.currentTimeMillis();
@@ -193,7 +192,7 @@ public class GameCanvas extends Canvas implements Runnable
 	{
 		Point pos = Login.myUser.getPoint();
 		System.out.println(pos);
-		IsometricSprite ip = iso.getPoint(Translator.toIso(pos));
+		IsometricSprite ip = iso.getPoint(iso.calculatePos(Translator.toIso(pos)));
 		ip.setCurrentPos(true);
 	}
 	

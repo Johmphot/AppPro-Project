@@ -40,6 +40,7 @@ public class Login extends JFrame
 	public static String username;
 	int listeningPort = 12345;
 	public static BGMusic music = new BGMusic();
+	public static SEMusic effect = new SEMusic();
 
 	/**
 	 * Launch the application.
@@ -76,7 +77,7 @@ public class Login extends JFrame
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		
-		if(!music.isAlive()) music.start();
+		music.music();
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
@@ -97,6 +98,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				Login newFrame = new Login();
 				newFrame.setVisible(true);
 			}
@@ -112,6 +114,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				effect.play();
 				try 
 				{
 					ICEWorldPeek.main(null);
@@ -126,6 +129,7 @@ public class Login extends JFrame
 		mntmPreferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				Preferences pref = new Preferences();
 				pref.setVisible(true);
 			}
@@ -141,6 +145,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				About ab = new About();
 				ab.setVisible(true);
 			}
@@ -156,6 +161,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				System.exit(0);
 			}
 		});
@@ -172,6 +178,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				Help help = new Help();
 				help.setSize(800, 1000);
 			}
@@ -212,6 +219,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				String name = formattedTextField.getText();
 				String password = new String(passwordField.getPassword());
 				if (userLogin(name,password))
@@ -236,6 +244,7 @@ public class Login extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				effect.play();
 				if(alienLogin())
 				{
 					Main world = new Main("Alien");
