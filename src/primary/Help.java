@@ -29,6 +29,7 @@ JEditorPane GlossaryContent;
 		setLocationRelativeTo(null);
 		
 		setupTabbedPane();
+		setResizable(false);
 		setVisible(true);
 		
 	}
