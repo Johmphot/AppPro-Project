@@ -1,11 +1,11 @@
-package primary;
 import java.awt.*;
 import java.io.IOException;
 import java.net.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.JTextComponent;
+import javax.swing.text.*;
+import javax.swing.text.html.*;
 
 
 public class Help extends JDialog implements HyperlinkListener {
@@ -25,7 +25,7 @@ JPanel GlossaryContentPane;
 JEditorPane GlossaryContent;
 
 	public Help(){
-		this.setTitle("Help");
+		this.setSize(800, 1000);
 		setLocationRelativeTo(null);
 		
 		setupTabbedPane();
@@ -55,7 +55,7 @@ JEditorPane GlossaryContent;
 		GlossaryContentPane = new JPanel();
 		GlossaryContentPane.setLayout(new BorderLayout());
 		try {
-			GlossaryContent = new JEditorPane("http://www.play-asia.com");
+			GlossaryContent = new JEditorPane("https://dl.dropboxusercontent.com/u/37431797/help/glossary.html");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,13 +85,15 @@ JEditorPane GlossaryContent;
 	private JComponent setupICEWorldPeekTab() {
 		ICEWorldPeekContentPane = new JPanel();
 		ICEWorldPeekContentPane.setLayout(new BorderLayout());
-		
+
 				try {
-					ICEWorldPeekContent = new JEditorPane("https://dl.dropboxusercontent.com/u/37431797/help/ICEWorldPeek/index.html");
+				
+				ICEWorldPeekContent = new JEditorPane("https://dl.dropboxusercontent.com/u/37431797/help/ICEWorldPeek/index.html");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		
 		ICEWorldPeekContent.addHyperlinkListener(this);
 		ICEWorldPeekContent.setEditable(false);
 		ICEWorldPeekContentPane.add(ICEWorldPeekContent,BorderLayout.CENTER);
@@ -99,20 +101,46 @@ JEditorPane GlossaryContent;
 	}
 	
 	 public void hyperlinkUpdate(HyperlinkEvent event) {
-		    if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-		      try {
+		    
+		 if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+		   //   try {
+		    	  if (event instanceof HTMLFrameHyperlinkEvent) {
+	                     HTMLFrameHyperlinkEvent  evt = (HTMLFrameHyperlinkEvent)event;
+	                     HTMLDocument doc = (HTMLDocument) ((JTextComponent) event.getSource()).getDocument();
+	                     doc.processHTMLFrameHyperlinkEvent(evt);}
+		   	  else{
+		    		  
+		    		  if(Desktop.isDesktopSupported()) {
+		    			    try {
+								Desktop.getDesktop().browse(event.getURL().toURI());
+							} catch (IOException e) {
+								e.printStackTrace();
+							} catch (URISyntaxException e) {
+								e.printStackTrace();
+							}
+		    			}
+		   	  }  // this above part is to bring hyperlink to be opened in default browser
+		    	  // but there is a bug from htmlframehyperlinkevent since every action in frame are count as htmlframehyperlinkevent
+		    	  // and this cannot bring url inside html frame to use default browser
+		    	  
+		    	 // ignore this if html are used in frame 
+		    	/*  else{
 		    	 if (event.getSource().equals(ICEWorldPeekContent))
 		        ICEWorldPeekContent.setPage(event.getURL());
 		    	 else if (event.getSource().equals(ICEPortContent))
 		    	ICEPortContent.setPage(event.getURL());
 		    	 else if (event.getSource().equals(GlossaryContent))
 		        GlossaryContent.setPage(event.getURL());
+		    	 else {
+		    		 
+		    		 }}
+		    	 
 		      } catch(IOException ioe) {
-		        
+		      }*/
 		      }
 		    }
 		  }
-}
-	
+
+
 
 
